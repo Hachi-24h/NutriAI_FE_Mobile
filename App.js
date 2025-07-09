@@ -13,7 +13,7 @@ const defaultOptions = {
 };
 
 const App = () => {
-  const [initialScreen, setInitialScreen] = useState("splash");
+  const [initialScreen, setInitialScreen] = useState('signin');
 
 
   if (!initialScreen) {

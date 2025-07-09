@@ -4,18 +4,15 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
-  Dimensions,
   Image,
 } from 'react-native';
 import styles from '../../Css/login/signin';
 import color from '../../Custom/Color';
-
+import { Eye, EyeSlash } from 'iconsax-react-native';
 
 
 
 const SignInScreen = () => {
-  const { width, height } = Dimensions.get('window');
   const [showPassword, setShowPassword] = useState(false);
   return (
     <View style={styles.container}>
@@ -24,7 +21,7 @@ const SignInScreen = () => {
 
         <Text style={styles.signInTitle}>Sign In</Text>
         <Text style={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor
+          NutriAI is a smart application that is always ready to support, accompany, and guide users in the most meticulous way.
         </Text>
       </View>
 
@@ -35,19 +32,27 @@ const SignInScreen = () => {
           placeholder="Username"
           placeholderTextColor={color.GRAY}
         />
+        <View style={styles.passwordContainer}>
           <TextInput
-          style={styles.input}
-          placeholder="Password"
-          placeholderTextColor={color.GRAY}
-          secureTextEntry={!showPassword}
-        />
-       
-        
+            style={styles.input}
+            placeholder="Password"
+            placeholderTextColor={color.GRAY}
+            secureTextEntry={!showPassword}
+          />
+          <TouchableOpacity
+            style={styles.iconEye}
+            onPress={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <Eye size={20} color={color.GRAY} />
+            ) : (
+              <EyeSlash size={20} color={color.GRAY} />
+            )}
+          </TouchableOpacity>
+        </View>
 
 
-        <TouchableOpacity >
-          <Text style={styles.forgotText}>Forgot Password?</Text>
-        </TouchableOpacity>
+
 
 
         <TouchableOpacity style={styles.signInButton}>

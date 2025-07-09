@@ -37,8 +37,9 @@ const styles = StyleSheet.create({
   formSection: {
     backgroundColor: color.WHITE,
     flex: 1,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    marginTop: height * 0.05,
+    borderTopLeftRadius: height * 0.04,
+    borderTopRightRadius: height * 0.04,
     paddingHorizontal: width * 0.06,
     paddingTop: height * 0.04,
   },
@@ -50,14 +51,14 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   inputWrapper: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  backgroundColor: color.LIGHT_GRAY,
-  borderRadius: 30,
-  paddingHorizontal: height * 0.02,
-  paddingVertical: height * 0.015,
-  marginBottom: 16,
-},
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: color.LIGHT_GRAY,
+    borderRadius: 30,
+    paddingHorizontal: height * 0.02,
+    paddingVertical: height * 0.015,
+    marginBottom: 16,
+  },
 
   iconWrapper: {
     paddingHorizontal: 6,
@@ -135,6 +136,19 @@ const styles = StyleSheet.create({
     color: color.DARK_BLUE,
     fontWeight: '700',
     fontSize: 14,
+  },
+  passwordContainer: {
+    position: 'relative',
+    width: '100%',
+    justifyContent: 'center',
+  },
+
+  iconEye: {
+    position: 'absolute',
+    right: width * 0.04,
+    top: '30%',
+    transform: [{ translateY: -10 }],
+    padding: 5,
   },
 });
 
