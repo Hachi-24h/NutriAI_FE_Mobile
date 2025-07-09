@@ -9,7 +9,7 @@ import Animated, {
   withRepeat,
   cancelAnimation,
 } from 'react-native-reanimated';
-import { useNavigation } from '@react-navigation/native';
+
 import styles from '../../Css/login/splash';
 
 const { width } = Dimensions.get('window');
@@ -54,7 +54,7 @@ const SplashScreen = ({ navigation}: any) => {
       clearTimeout(showTextTimer);
       clearInterval(shakeInterval);
     };
-  }, []);
+  }, );
 
   const bottomAnim = useAnimatedStyle(() => ({
     transform: [{ scale: scaleBottom.value }],
@@ -89,7 +89,7 @@ const SplashScreen = ({ navigation}: any) => {
 
       <Animated.View style={[styles.centerContent, centerAnim]}>
         <Image
-          source={require('../../Image/logo.png')}
+          source={require('../../Image/logo1.png')}
           style={styles.logo}
           resizeMode="contain"
         />

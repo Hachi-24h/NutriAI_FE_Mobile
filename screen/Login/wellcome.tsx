@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, Image, TouchableOpacity,  StatusBar } from 'react-native';
 import styles from '../../Css/login/wellcome'; // Import styles from the CSS file
 const WelcomeScreen = ({ navigation }: any) => {
   return (
@@ -8,7 +8,7 @@ const WelcomeScreen = ({ navigation }: any) => {
       
       <View style={styles.logoContainer}>
         <Image
-          source={require('../../Image/logo.png')} // Thay bằng logo NutriAI
+          source={require('../../Image/logo1.png')} // Thay bằng logo NutriAI
           style={styles.logo}
           resizeMode="contain"
         />

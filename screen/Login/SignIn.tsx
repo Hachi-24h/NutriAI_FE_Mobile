@@ -12,7 +12,7 @@ import { Eye, EyeSlash } from 'iconsax-react-native';
 
 
 
-const SignInScreen = () => {
+const SignInScreen = ({navigation}:any) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <View style={styles.container}>
@@ -83,7 +83,7 @@ const SignInScreen = () => {
           <Text style={styles.footerText}>
             Don't have an account?
           </Text>
-          <TouchableOpacity style={styles.buttonSignUp}>
+          <TouchableOpacity style={styles.buttonSignUp} onPress={() => navigation.navigate('signup')}>
             <Text style={styles.footerLink}>Sign Up</Text>
           </TouchableOpacity>
         </View>
