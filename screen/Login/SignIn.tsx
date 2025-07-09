@@ -1,0 +1,92 @@
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+  Image,
+} from 'react-native';
+import styles from '../../Css/login/signin';
+import color from '../../Custom/Color';
+
+
+
+
+const SignInScreen = () => {
+  const { width, height } = Dimensions.get('window');
+  const [showPassword, setShowPassword] = useState(false);
+  return (
+    <View style={styles.container}>
+      {/* Header vàng */}
+      <View style={styles.topSection}>
+
+        <Text style={styles.signInTitle}>Sign In</Text>
+        <Text style={styles.description}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do tempor
+        </Text>
+      </View>
+
+      {/* Form trắng */}
+      <View style={styles.formSection}>
+        <TextInput
+          style={styles.input}
+          placeholder="Username"
+          placeholderTextColor={color.GRAY}
+        />
+          <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor={color.GRAY}
+          secureTextEntry={!showPassword}
+        />
+       
+        
+
+
+        <TouchableOpacity >
+          <Text style={styles.forgotText}>Forgot Password?</Text>
+        </TouchableOpacity>
+
+
+        <TouchableOpacity style={styles.signInButton}>
+          <Text style={styles.signInButtonText}>Sign In</Text>
+        </TouchableOpacity>
+
+        {/* Hoặc sử dụng Google / Facebook */}
+        <View style={styles.socialButtons}>
+          <TouchableOpacity style={styles.socialButton}>
+            <Image
+              source={{ uri: 'https://img.icons8.com/color/48/google-logo.png' }}
+              style={styles.icon}
+            />
+            <Text style={styles.socialText}>Continue with Google</Text>
+
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.socialButton}>
+            <Image
+              source={{ uri: 'https://img.icons8.com/color/48/facebook-new.png' }}
+              style={styles.icon}
+            />
+            <Text style={styles.socialText}>Continue with Facebook</Text>
+
+          </TouchableOpacity>
+        </View>
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>
+            Don't have an account?
+          </Text>
+          <TouchableOpacity style={styles.buttonSignUp}>
+            <Text style={styles.footerLink}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+
+    </View >
+  );
+};
+
+export default SignInScreen;
