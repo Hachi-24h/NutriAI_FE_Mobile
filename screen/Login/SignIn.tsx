@@ -12,7 +12,7 @@ import { Eye, EyeSlash } from 'iconsax-react-native';
 
 
 
-const SignInScreen = ({navigation}:any) => {
+const SignInScreen = ({ navigation }: any) => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <View style={styles.container}>
@@ -48,6 +48,9 @@ const SignInScreen = ({navigation}:any) => {
             ) : (
               <EyeSlash size={20} color={color.GRAY} />
             )}
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('forgotPassword')} >
+            <Text style={styles.forgotText}>Forgot password</Text>
           </TouchableOpacity>
         </View>
 

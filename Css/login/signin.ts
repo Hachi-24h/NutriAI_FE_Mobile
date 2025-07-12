@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   iconEye: {
     position: 'absolute',
     right: width * 0.04,
-    top: '30%',
+    top: '20%',
     transform: [{ translateY: -10 }],
     padding: 5,
   },

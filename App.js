@@ -13,13 +13,7 @@ const defaultOptions = {
 };
 
 const App = () => {
-  const [initialScreen, setInitialScreen] = useState('signin');
-
-
-  if (!initialScreen) {
-    // Hiển thị màn hình loading trong khi chờ kiểm tra trạng thái
-    return null;
-  }
+  const initialScreen= 'splash'; //
 
   return (
     <NavigationContainer>
