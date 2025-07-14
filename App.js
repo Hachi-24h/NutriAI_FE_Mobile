@@ -13,7 +13,7 @@ const defaultOptions = {
 };
 
 const App = () => {
-  const initialScreen= 'splash'; //
+  const initialScreen= 'home'; //
 
   return (
     <NavigationContainer>

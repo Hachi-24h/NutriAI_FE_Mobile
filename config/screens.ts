@@ -7,11 +7,12 @@ import signin from '../screen/Login/SignIn';
 import signup from '../screen/Login/SignUp';
 import forgotPassword from '../screen/Login/ForgotPassword';
 import changePassword from '../screen/Login/ChangePassword';
+import home from '../screen/Home/Home';
 export default {
 
   Demo,
   wellcome,
   splash,
   signin,signup,forgotPassword,
-changePassword,
+changePassword,home,
 };
