@@ -8,6 +8,8 @@ import signup from '../screen/Login/SignUp';
 import forgotPassword from '../screen/Login/ForgotPassword';
 import changePassword from '../screen/Login/ChangePassword';
 import home from '../screen/Home/Home';
+import biores from "../screen/other/BiometricRegister"
+import biologin from "../screen/other/BiometricLogin"
 export default {
 
   Demo,
@@ -15,4 +17,5 @@ export default {
   splash,
   signin,signup,forgotPassword,
 changePassword,home,
+biores,biologin,
 };

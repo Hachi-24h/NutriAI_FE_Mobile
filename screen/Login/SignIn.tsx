@@ -4,16 +4,49 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Image,
+  Image, Alert
 } from 'react-native';
 import styles from '../../Css/login/signin';
 import color from '../../Custom/Color';
 import { Eye, EyeSlash } from 'iconsax-react-native';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import ReactNativeBiometrics from 'react-native-biometrics';
 
 
 const SignInScreen = ({ navigation }: any) => {
   const [showPassword, setShowPassword] = useState(false);
+  const [username, setUserName] = useState('');
+  const handleBiometricLogin = async () => {
+    const enabled = await AsyncStorage.getItem('biometricEnabled');
+    const savedPhone = await AsyncStorage.getItem('biometricPhone');
+
+    if (enabled !== 'true' || !savedPhone) {
+      Alert.alert('Bạn chưa đăng ký đăng nhập bằng vân tay');
+      return;
+    }
+
+    if (username !== savedPhone) {
+      Alert.alert('Số điện thoại không khớp với vân tay đã đăng ký');
+      return;
+    }
+
+    const rnBiometrics = new ReactNativeBiometrics();
+
+    rnBiometrics.simplePrompt({ promptMessage: 'Xác thực sinh trắc học' })
+      .then(({ success }) => {
+        if (success) {
+          Alert.alert('✅ Đăng nhập thành công!');
+          navigation.navigate('home'); // đổi thành trang chính của bạn
+        } else {
+          Alert.alert('❌ Xác thực thất bại!');
+        }
+      })
+      .catch(() => {
+        Alert.alert('❌ Lỗi xác thực!');
+      });
+  };
+
   return (
     <View style={styles.container}>
       {/* Header vàng */}
@@ -31,6 +64,7 @@ const SignInScreen = ({ navigation }: any) => {
           style={styles.input}
           placeholder="Username"
           placeholderTextColor={color.GRAY}
+          onChangeText={setUserName}
         />
         <View style={styles.passwordContainer}>
           <TextInput
@@ -54,13 +88,22 @@ const SignInScreen = ({ navigation }: any) => {
           </TouchableOpacity>
         </View>
 
+        <View style={styles.Vsignin}>
+          <TouchableOpacity style={styles.signInButton}>
+            <Text style={styles.signInButtonText}>Sign In</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.signFi}
+            onPress={handleBiometricLogin}
+          >
+            <Image
+              source={require('../../Icon/fingerprint.png')}
+              style={styles.finger}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+        </View>
 
-
-
-
-        <TouchableOpacity style={styles.signInButton}>
-          <Text style={styles.signInButtonText}>Sign In</Text>
-        </TouchableOpacity>
 
         {/* Hoặc sử dụng Google / Facebook */}
         <View style={styles.socialButtons}>

@@ -80,12 +80,27 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 6,
     elevation: 5,
+    width: "70%"
+  },
+  Vsignin:{
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width:width,
+  },
+  signFi:{
+      width: "30%",
+      marginLeft: width* 0.04,
+  },
+  finger:{
+    width: height* 0.07,
+    height: height * 0.07,
   },
   signInButtonText: {
     color: color.WHITE,
     fontWeight: '700',
     fontSize: 16,
   },
+  
   socialButtons: {
     marginTop: 30,
     gap: 14,
@@ -150,6 +165,8 @@ const styles = StyleSheet.create({
     transform: [{ translateY: -10 }],
     padding: 5,
   },
+ 
+  
 });
 
 export default styles;
