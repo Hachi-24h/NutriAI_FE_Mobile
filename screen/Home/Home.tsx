@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import { View, Text, ScrollView, Image, } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, ScrollView, Image, TouchableOpacity, } from 'react-native';
 
 import { FeatureButton } from './component/FeatureButton';
 import LinearGradient from 'react-native-linear-gradient';
@@ -18,10 +18,17 @@ import styles from '../../Css/Home/home'; // Import styles from the new file
 import TodayOverview from './component/TodayOverview';
 import gradientPresets from '../../Custom/gradientPresets';
 import Footer from '../other/footer';
+import SideMenu from './component/SideMenu';
 
 
 const Home = () => {
+    const tip = " Stay hydrated to keep your metabolism running efficiently! "
+    const [menuVisible, setMenuVisible] = useState(false);
 
+    const handleMenuSelect = (option: string) => {
+        console.log('Selected:', option);
+        setMenuVisible(false);
+    };
     return (
         <View style={{ flex: 1 }}>
             {/* Gradient Header */}
@@ -32,7 +39,9 @@ const Home = () => {
                 style={styles.header}
             >
                 <View style={styles.headerRow}>
-                    <HambergerMenu size={24} color={color.WHITE} />
+                    <TouchableOpacity onPress={() => setMenuVisible(true)}>
+                        <HambergerMenu size={24} color={color.WHITE} />
+                    </TouchableOpacity>
                     <View style={styles.headerTextGroup}>
 
                         <Text style={styles.headerTitle}>Nutri AI</Text>
@@ -44,17 +53,18 @@ const Home = () => {
             {/* body */}
             <ScrollView style={styles.container}>
                 {/* Chào mừng người dùng */}
-                <Text style={styles.greeting}>Chào mừng, Nam!</Text>
+                <Text style={styles.greeting}>Hello, Nam!</Text>
                 <View style={styles.suggestionBox}>
                     <View style={styles.Vicon}>
                         <Image
                             source={require('../../Image/sug.png')}
                             style={styles.suggestionImage}
                         />
+
                     </View>
                     <View style={styles.Vtextsugestion}>
                         <Text style={styles.suggestionText}>
-                            💡 Mẹo hôm nay: Hãy uống đủ nước để duy trì quá trình trao đổi chất!
+                            💡 Today’s Tip:{tip}
                         </Text>
                     </View>
                 </View>
@@ -70,30 +80,30 @@ const Home = () => {
                         style={styles.cham} />
                     <View style={styles.row}>
                         <FeatureButton
-                            label="Gợi ý thực đơn"
-                            description="AI thông minh"
+                            label="Meal Suggestions"
+                            description="Smart AI"
                             icon={<Chart size={28} color={color.WHITE} variant="Bold" />}
                             gradientColors={gradientPresets.lavenderDream}
 
                         />
                         <FeatureButton
-                            label="Báo cáo"
-                            description="Theo dõi tiến trình"
+                            label="Reports"
+                            description="Track your progress"
                             icon={<Chart size={28} color={color.WHITE} variant="Bold" />}
                             gradientColors={gradientPresets.iceMintGlow}
                         />
                     </View>
                     <View style={styles.row}>
                         <FeatureButton
-                            label="Mục tiêu"
-                            description="Đặt mục tiêu mới"
+                            label="Goals"
+                            description="Set new targets"
                             icon={<Flag size={28} color={color.WHITE} variant="Bold" />}
                             gradientColors={gradientPresets.reportCard}
                         />
 
                         <FeatureButton
-                            label="Quét ảnh"
-                            description="Nhận diện thức ăn"
+                            label="Scan Image"
+                            description="Recognize food"
                             icon={<Camera size={28} color={color.WHITE} variant="Bold" />}
                             gradientColors={gradientPresets.cottonCandyFade}
                         />
@@ -109,9 +119,9 @@ const Home = () => {
 
                             <FtxToken size={25} color={color.PRIMARY_BLUE} variant="Bold" />
 
-                            <Text style={styles.sectionTitle}>Bữa ăn gần đây</Text>
+                            <Text style={styles.sectionTitle}>What You Ate</Text>
                         </View>
-                        <Text style={styles.viewAll}>Xem tất cả</Text>
+                        <Text style={styles.viewAll}>View all</Text>
                     </View>
 
                     <View style={styles.mealCard}>
@@ -159,6 +169,11 @@ const Home = () => {
                 {/* Mẹo dinh dưỡng */}
 
             </ScrollView>
+            <SideMenu
+                visible={menuVisible}
+                onClose={() => setMenuVisible(false)}
+                onSelect={handleMenuSelect}
+            />
             <Footer />
         </View>
 

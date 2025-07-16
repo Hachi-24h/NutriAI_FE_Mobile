@@ -182,11 +182,11 @@ const styles = StyleSheet.create({
     cham: {
         height: height * 0.08,
         width: height * 0.08,
-        backgroundColor: color.RED,
+        elevation: 12,
         borderRadius: height * 0.05,
         marginBottom: height * 0.02,
         position: 'absolute',
-        top: height * 0.21,
+        top: height * 0.18,
         left: width * 0.38,
         zIndex: 109,
     },
@@ -202,6 +202,7 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         lineHeight: 20,
         textAlign: 'left',
+        padding:height* 0.01,
     },
     Vtextsugestion: {
         backgroundColor: color.WHITE,

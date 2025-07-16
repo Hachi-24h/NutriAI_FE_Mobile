@@ -9,7 +9,7 @@ import {
     Dimensions,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Home, Gift, Scan, Setting2 } from 'iconsax-react-native';
+import { Home,  Scan, Setting2, Notification, Chart } from 'iconsax-react-native';
 import color from '../../Custom/Color';
 
 
@@ -28,12 +28,12 @@ const Footer = () => {
             <View style={[styles.buttonfuntion,]} >
                 <TouchableOpacity style={styles.navItem}>
                     <Home size={24} color={color.PRIMARY_BLUE} />
-                    <Text style={styles.activeLabel}>Trang chủ</Text>
+                    <Text style={styles.activeLabel}>Home</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={[styles.navItem]}>
-                    <Gift size={24} color="#999" />
-                    <Text style={styles.label}>Đổi quà</Text>
+                    <Chart size={24} color="#999" />
+                    <Text style={styles.label}>Reports</Text>
                 </TouchableOpacity>
             </View>
 
@@ -49,13 +49,13 @@ const Footer = () => {
             </View>
             <View style={[styles.buttonfuntion]} >
                 <TouchableOpacity style={styles.navItem}>
-                    <Scan size={24} color="#999" />
-                    <Text style={styles.label}>Thông báo</Text>
+                    <Notification size={24} color="#999" />
+                    <Text style={styles.label}>Notification</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.navItem}>
                     <Setting2 size={24} color="#999" />
-                    <Text style={styles.label}>Cài đặt</Text>
+                    <Text style={styles.label}>Setting</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         width: width * 0.378,
         backgroundColor: color.LIGHT_BLUE,
         marginHorizontal: width * 0.02,
-        paddingHorizontal: width * 0.01,
+        paddingHorizontal: width * 0.05,
     },
     navItem: {
         flexDirection: 'column',
