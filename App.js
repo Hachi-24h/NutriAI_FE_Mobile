@@ -13,7 +13,7 @@ const defaultOptions = {
 };
 
 const App = () => {
-  const initialScreen= 'signin'; //
+  const initialScreen= 'home'; //
 
   return (
     <NavigationContainer>

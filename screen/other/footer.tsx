@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     },
     centerWrapper: {
         position: 'absolute',
+        bottom: 10,
         top: -25,
         left: (width - 64) / 2,
         zIndex: 10,

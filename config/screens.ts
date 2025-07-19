@@ -8,14 +8,21 @@ import signup from '../screen/Login/SignUp';
 import forgotPassword from '../screen/Login/ForgotPassword';
 import changePassword from '../screen/Login/ChangePassword';
 import home from '../screen/Home/Home';
-import biores from "../screen/other/BiometricRegister"
-import biologin from "../screen/other/BiometricLogin"
+// import biores from "../screen/other/BiometricRegister"
+// import biologin from "../screen/other/BiometricLogin"
+import profile from '../screen/Profile/ProfileScreen';
+import funtion from '../screen/Profile/component/funtion';
 export default {
 
   Demo,
   wellcome,
   splash,
-  signin,signup,forgotPassword,
-changePassword,home,
-biores,biologin,
+  signin, signup, forgotPassword,
+  changePassword, home,
+  // biores, biologin,
+
+  // profile
+  profile,
+  funtion
+
 };

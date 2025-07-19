@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         padding: height * 0.02,
         marginTop: height * 0.1,
         // paddingTop: height * 0.1, // Adjusted to account for the header
-        backgroundColor: color.WHITE,
+        backgroundColor: color.LIGHT_BLUE,
     },
     header: {
         position: 'absolute',

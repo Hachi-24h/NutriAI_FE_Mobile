@@ -30,7 +30,7 @@ const Home = () => {
         setMenuVisible(false);
     };
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: color.LIGHT_BLUE }}>
             {/* Gradient Header */}
             <LinearGradient
                 colors={[color.gradient1, color.gradient2, color.gradient3]}
@@ -61,6 +61,7 @@ const Home = () => {
                             style={styles.suggestionImage}
                         />
 
+
                     </View>
                     <View style={styles.Vtextsugestion}>
                         <Text style={styles.suggestionText}>
@@ -68,6 +69,7 @@ const Home = () => {
                         </Text>
                     </View>
                 </View>
+                
 
                 {/* Chức năng */}
                 <View>
@@ -80,18 +82,19 @@ const Home = () => {
                         style={styles.cham} />
                     <View style={styles.row}>
                         <FeatureButton
+                            label="Scan Image"
+                            description="Recognize food"
+                            icon={<Camera size={28} color={color.WHITE} variant="Bold" />}
+                            gradientColors={gradientPresets.cottonCandyFade}
+                        />
+                        <FeatureButton
                             label="Meal Suggestions"
                             description="Smart AI"
                             icon={<Chart size={28} color={color.WHITE} variant="Bold" />}
                             gradientColors={gradientPresets.lavenderDream}
 
                         />
-                        <FeatureButton
-                            label="Reports"
-                            description="Track your progress"
-                            icon={<Chart size={28} color={color.WHITE} variant="Bold" />}
-                            gradientColors={gradientPresets.iceMintGlow}
-                        />
+
                     </View>
                     <View style={styles.row}>
                         <FeatureButton
@@ -100,13 +103,13 @@ const Home = () => {
                             icon={<Flag size={28} color={color.WHITE} variant="Bold" />}
                             gradientColors={gradientPresets.reportCard}
                         />
-
                         <FeatureButton
-                            label="Scan Image"
-                            description="Recognize food"
-                            icon={<Camera size={28} color={color.WHITE} variant="Bold" />}
-                            gradientColors={gradientPresets.cottonCandyFade}
+                            label="Reports"
+                            description="Track your progress"
+                            icon={<Chart size={28} color={color.WHITE} variant="Bold" />}
+                            gradientColors={gradientPresets.iceMintGlow}
                         />
+
                     </View>
                 </View>
                 <TodayOverview />
