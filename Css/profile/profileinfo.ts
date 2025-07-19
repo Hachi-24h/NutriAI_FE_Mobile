@@ -12,18 +12,12 @@ const styles = StyleSheet.create({
     },
     header: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-end',
         alignItems: 'center',
         marginBottom: height * 0.02,
         paddingHorizontal: width * 0.01,
     },
-    textheader: {
-        fontSize: height * 0.025,
-        fontWeight: 'bold',
-        color: color.BLUE_BUTTON,
-        textAlign: 'center',
-        width: width * 0.8,
-    },
+
     label: {
         fontSize: height * 0.015,
         color: color.DARK_GRAY,

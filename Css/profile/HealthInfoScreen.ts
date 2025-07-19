@@ -1,68 +1,74 @@
-import { StyleSheet } from "react-native";
-import color from "../../Custom/Color";
 
+import color from "../../Custom/Color";
+import { Dimensions, StyleSheet } from 'react-native';
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: color.WHITE,
-    paddingHorizontal: '5%',
-    paddingTop: '5%',
-  },
-  header: {
-    backgroundColor: color.PRIMARY_BLUE,
-    borderRadius: 12,
-    paddingVertical: '3%',
-    alignItems: 'center',
-    marginBottom: '5%',
-  },
-  headerText: {
-    color: color.WHITE,
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  card: {
-    backgroundColor: color.LIGHT_BLUE,
-    borderRadius: 12,
-    padding: '5%',
-    marginBottom: '5%',
-    width: '100%',
-    shadowColor: color.SHADOW_BLACK,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  cardText: {
-    fontSize: 16,
-    color: color.DARK_GRAY,
-    lineHeight: 22,
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginTop: '5%',
-  },
-  button: {
-    backgroundColor: color.DARK_BLUE,
-    paddingVertical: '3%',
-    paddingHorizontal: '6%',
-    borderRadius: 8,
-    marginRight: '4%',
-  },
-  buttonText: {
-    color: color.WHITE,
-    fontWeight: '600',
-  },
-  buttonOutline: {
-    borderColor: color.DARK_BLUE,
-    borderWidth: 1.5,
-    paddingVertical: '3%',
-    paddingHorizontal: '6%',
-    borderRadius: 8,
-  },
-  buttonTextOutline: {
-    color: color.DARK_BLUE,
-    fontWeight: '600',
-  },
+    container: {
+        flexDirection: 'column',
+        backgroundColor: color.LIGHT_BLUE,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: width,
+        marginTop: height * 0.02,
+    },
+    title:{
+
+        fontSize: height * 0.03,
+        fontWeight: 'bold',
+        color: color.BLACK,
+        marginBottom: height * 0.02,
+    },
+    editButton:{
+       marginTop: height * 0.005,
+    },
+    logo:{
+        width: width * 0.07,
+        height: width * 0.07,
+    },
+    card: {
+        backgroundColor: color.WHITE,
+        borderRadius: width * 0.02,
+        padding: width * 0.05,
+        marginVertical: height * 0.02,
+        width: "90%",
+        shadowColor: color.SHADOW_BLACK,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: width * 0.02,
+
+    },
+    Vcard_con: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    inputContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        marginBottom: height * 0.02,
+
+    },
+    label: {
+        fontSize: height * 0.015,
+        color: color.DARK_GRAY,
+        fontWeight: 'bold',
+        marginTop: height * 0.012,
+    },
+    input: {
+
+        borderRadius: width * 0.02,
+        padding: height * 0.015,
+
+        color: color.BLACK,
+        width: '50%',
+        textAlign: 'center',
+    },
+    disabledInput: {
+        borderWidth: 1,
+        borderColor: color.GRAY,
+        backgroundColor: color.WHITE,
+    }
+
 });
 export default styles;

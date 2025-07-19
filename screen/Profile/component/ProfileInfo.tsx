@@ -49,7 +49,6 @@ const ProfileInfo: React.FC<Props> = ({ name, dateOfBirth, genderuser, email, ph
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
-        <Text style={styles.textheader}> Your information </Text>
         {
           !isEditing && (
             <TouchableOpacity onPress={changeinfo}>
@@ -60,8 +59,9 @@ const ProfileInfo: React.FC<Props> = ({ name, dateOfBirth, genderuser, email, ph
 
       </View>
       <View style={styles.formSection}>
+          {isEditing && (<LabelInput label="Name" editable={isEditing} defaultValue={name ?? ''} />)}
         <LabelInput label="Phone" editable={false} defaultValue={phone ?? ''} />
-        {isEditing && (<LabelInput label="Name" editable={isEditing} defaultValue={name ?? ''} />)}
+      
 
         <Text style={styles.label}>Date of Birth</Text>
         <TouchableOpacity onPress={showDatePicker} disabled={!isEditing} style={styles.input2}>
@@ -86,6 +86,7 @@ const ProfileInfo: React.FC<Props> = ({ name, dateOfBirth, genderuser, email, ph
 
           {['Male', 'Female'].map((g) => (
             <TouchableOpacity
+              disabled={isEditing ? false : true}
               key={g}
               style={styles.radioOption}
               onPress={() => setGender(g)}

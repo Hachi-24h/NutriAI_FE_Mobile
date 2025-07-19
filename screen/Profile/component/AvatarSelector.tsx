@@ -78,9 +78,9 @@ export default AvatarSelector;
 const styles = StyleSheet.create({
   avatarContainer: {
     alignItems: 'center',
-    height: height * 0.3,
+    height: height * 0.25,
     backgroundColor: color.BLUE_BUTTON,
-    paddingTop: height * 0.05,
+    paddingTop: height * 0.02,
     borderBottomLeftRadius: width * 0.1,
     borderBottomRightRadius: width * 0.1,
   },
