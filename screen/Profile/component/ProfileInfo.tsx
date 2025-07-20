@@ -49,14 +49,10 @@ const ProfileInfo: React.FC<Props> = ({ name, dateOfBirth, genderuser, email, ph
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
-        {
-          !isEditing && (
-            <TouchableOpacity onPress={changeinfo}>
-              <UserEdit size={24} color={color.BLACK} />
+        <Text style={styles.headertext}>Thông tin cá nhân</Text>
+            <TouchableOpacity onPress={changeinfo} disabled={isEditing} >
+              <UserEdit size={24} color={isEditing?  color.LIGHT_BLUE:color.BLACK } />
             </TouchableOpacity>
-          )
-        }
-
       </View>
       <View style={styles.formSection}>
           {isEditing && (<LabelInput label="Name" editable={isEditing} defaultValue={name ?? ''} />)}

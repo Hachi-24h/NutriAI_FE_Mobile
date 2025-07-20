@@ -11,7 +11,7 @@ import home from '../screen/Home/Home';
 // import biores from "../screen/other/BiometricRegister"
 // import biologin from "../screen/other/BiometricLogin"
 import profile from '../screen/Profile/ProfileScreen';
-import funtion from '../screen/Profile/component/funtion';
+
 import healthinfo from '../screen/Profile/component/HealthInfo';
 export default {
 
@@ -24,7 +24,7 @@ export default {
 
   // profile
   profile,
-  funtion,
+  
   healthinfo
 
 };

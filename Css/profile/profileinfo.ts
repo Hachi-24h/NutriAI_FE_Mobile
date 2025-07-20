@@ -6,6 +6,8 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     wrapper: {
         padding: width * 0.05,
+        // backgroundColor: color.WHITE,s
+        borderRadius: width * 0.02,
     },
     inputContainer: {
         marginBottom: height * 0.02,
@@ -103,7 +105,18 @@ const styles = StyleSheet.create({
     },
     formSection:{
         flexDirection: 'column',
-        height: height * 0.5,
-    }
+        height: height * 0.53,
+        backgroundColor: color.WHITE,
+        padding: width * 0.05,
+        borderRadius: width * 0.02,
+        marginBottom: height * 0.01,
+    },
+    headertext: {
+        fontSize: height * 0.025,
+        fontWeight: 'bold',
+        color: color.BLACK,
+        width: width * 0.8,
+        textAlign: 'center',
+    },
 });
 export default styles;
