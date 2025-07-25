@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
         height: height,
         width: width,
         backgroundColor: color.LIGHT_BLUE,
-        // paddingHorizontal: width * 0.04,
     },
     header: {
         flexDirection: 'row',
@@ -19,12 +18,17 @@ const styles = StyleSheet.create({
         paddingLeft: width * 0.04,
         borderRadius: 12,
     },
-    shadow:{
-        shadowColor: color.WHITE,
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 5,
-        shadowRadius: 5,
-        width: width * 0.9,
+    shadow: {
+        shadowOffset: { width: -5, height: 5 },
+        shadowOpacity: 1,
+        shadowRadius: 0,
+        width: width * 1,
+    },
+     shadowfeature: {
+        shadowOffset: { width: -10, height: 5 },
+        shadowOpacity: 1,
+        shadowRadius: 2,
+        width: width * 1,
     },
     VtitleContainer: {
         flexDirection: 'row',
@@ -32,11 +36,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: color.PRIMARY_BLUE,
         borderTopLeftRadius: width * 0.1,
-         borderBottomLeftRadius: width * 0.1,
+        borderBottomLeftRadius: width * 0.1,
         paddingVertical: height * 0.015,
         marginLeft: width * 0.1,
         paddingHorizontal: width * 0.1,
-    
     },
     title: {
         fontSize: width * 0.06,
@@ -82,22 +85,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: color.BLACK,
     },
-    notification: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    badge: {
-        backgroundColor: color.RED,
-        borderRadius: height * 0.012,
-        paddingHorizontal: width * 0.015,
-        marginLeft: width * 0.01,
-        paddingVertical: height * 0.002,
-    },
-    badgeText: {
-        color: color.WHITE,
-        fontSize: width * 0.03,
-        fontWeight: 'bold',
-    },
     featureList: {
         gap: height * 0.015,
     },
@@ -119,11 +106,19 @@ const styles = StyleSheet.create({
         width: width * 0.06,
         height: width * 0.06,
         marginRight: width * 0.04,
-
     },
     featureArrow: {
         marginLeft: 'auto',
         color: color.DARK_GRAY,
+    },
+    Vmenu:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: width * 0.02,
+    },
+    featureArrowmenu:{
+
     },
     featureText: {
         fontSize: width * 0.045,
@@ -138,19 +133,32 @@ const styles = StyleSheet.create({
         marginBottom: height * 0.005,
     },
     logoutButton: {
-        marginTop: height * 0.04,
-        backgroundColor: '#E3E7EB',
-        borderRadius: height * 0.02,
+        backgroundColor: color.RED,
+        borderRadius: height * 0.5,
         paddingVertical: height * 0.016,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         gap: width * 0.02,
+        marginHorizontal: width * 0.1,
+        marginBottom: height * 0.02,
     },
     logoutText: {
         fontSize: width * 0.045,
         color: color.BLACK,
         fontWeight: '600',
+    },
+    subItem: {
+        marginHorizontal: width * 0.1,
+        backgroundColor: '#f0f0f0',
+        paddingVertical: height * 0.02,
+        paddingHorizontal: width * 0.05,
+        borderRadius: height * 0.015,
+        marginTop: 5,
+    },
+    subItemText: {
+        fontSize: width * 0.04,
+        color: color.BLACK,
     },
 });
 
