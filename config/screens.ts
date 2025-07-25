@@ -14,6 +14,7 @@ import profile from '../screen/Profile/ProfileScreen';
 
 import healthinfo from '../screen/Profile/component/HealthInfo';
 import setting from '../screen/Setting/Setting';
+import notisetting from '../screen/Setting/NotificationSetting';
 export default {
 
   Demo,
@@ -28,6 +29,7 @@ export default {
   healthinfo,
 
   // setting
-  setting
+  setting,
+  notisetting,
 
 };

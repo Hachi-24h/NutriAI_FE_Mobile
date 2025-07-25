@@ -29,26 +29,31 @@ const features = [
             'Change Password',
             'Add / Remove Gmail',
             'Fingerprint Setup'
-        ]
+        ],
+        navigation: ['changePassword', 'addGmail', 'fingerprintSetup']
     },
     {
         id: '2',
         name: 'Notification Settings',
         icon: require('../../Icon/edit.png'),
+        navigation: 'notisetting',
     },
     {
         id: '3',
         name: 'AI Assistant',
         icon: require('../../Icon/edit.png'),
+        navigation: 'aiAssistant',
     },
     {
         id: '4',
         name: 'Help & Support',
         icon: require('../../Icon/edit.png'),
+        navigation: 'helpSupport',
     },
 ];
 
-const SettingScreen = () => {
+const SettingScreen = ({ navigation }: any) => {
+
     const name = 'Thanh Nam';
     const [expandedFeatureId, setExpandedFeatureId] = useState<string | null>(null);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -66,10 +71,12 @@ const SettingScreen = () => {
     }, [expandedFeatureId]);
 
     const handleFeaturePress = (item: any) => {
-        if (item.subItems) {
+        if (item.id === '1') {
+            // Với Account Settings: toggle submenu
             setExpandedFeatureId(expandedFeatureId === item.id ? null : item.id);
-        } else {
-            setExpandedFeatureId(null); // đóng nếu nhấn vào mục không có submenu
+        } else if (item.navigation) {
+            // Với các nút chính khác → chuyển trang luôn
+            navigation.navigate(item.navigation);
         }
     };
 
@@ -104,7 +111,10 @@ const SettingScreen = () => {
                         exiting={SlideOutDown.duration(200)}
                         layout={Layout.springify().duration(300)}
                         style={styles.subItem}>
-                        <TouchableOpacity style={styles.Vmenu}>
+                        <TouchableOpacity
+                            style={styles.Vmenu}
+                            onPress={() => navigation.navigate(item.navigation[subIndex])}
+                        >
                             <Text style={styles.subItemText}>{sub}</Text>
                             <ArrowRight2 size={20} color={color.BLACK} variant="TwoTone" style={styles.featureArrowmenu} />
                         </TouchableOpacity>
@@ -114,6 +124,10 @@ const SettingScreen = () => {
         </Animated.View>
     );
 
+    const handleUserCardPress = () => {
+        // Navigate to user profile or settings
+        navigation.navigate('profile');
+    };
 
     return (
         <LinearGradient
@@ -133,13 +147,15 @@ const SettingScreen = () => {
                 </DropShadow>
             </Animated.View>
             <DropShadow style={[styles.shadowfeature, { shadowColor: gradientPresets.cottonCandyFade[0] }]}>
-                <Animated.View entering={SlideInLeft.duration(300).delay(50)} style={styles.userCard}>
-                    <Image
-                        source={require('../../Image/sug.png')}
-                        style={styles.avatar}
-                    />
-                    <Text style={styles.username}>{name}</Text>
-                </Animated.View>
+                <TouchableOpacity onPress={handleUserCardPress} activeOpacity={0.8}>
+                    <Animated.View entering={SlideInLeft.duration(300).delay(50)} style={styles.userCard}>
+                        <Image
+                            source={require('../../Image/sug.png')}
+                            style={styles.avatar}
+                        />
+                        <Text style={styles.username}>{name}</Text>
+                    </Animated.View>
+                </TouchableOpacity>
             </DropShadow>
             <Animated.Text entering={SlideInLeft.duration(300).delay(50)} style={styles.featureTitle}>
                 Feature
