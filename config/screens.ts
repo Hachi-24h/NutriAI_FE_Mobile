@@ -13,6 +13,7 @@ import home from '../screen/Home/Home';
 import profile from '../screen/Profile/ProfileScreen';
 
 import healthinfo from '../screen/Profile/component/HealthInfo';
+import setting from '../screen/Setting/Setting';
 export default {
 
   Demo,
@@ -24,7 +25,9 @@ export default {
 
   // profile
   profile,
-  
-  healthinfo
+  healthinfo,
+
+  // setting
+  setting
 
 };

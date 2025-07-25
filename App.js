@@ -13,7 +13,7 @@ const defaultOptions = {
 };
 
 const App = () => {
-  const initialScreen= 'profile'; //
+  const initialScreen= 'setting'; //
 
   return (
     <NavigationContainer>

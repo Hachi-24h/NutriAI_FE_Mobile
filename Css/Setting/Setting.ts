@@ -1,0 +1,157 @@
+import { StyleSheet } from 'react-native';
+import { width, height } from '../../Custom/dimension';
+import color from '../../Custom/Color';
+
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'column',
+        height: height,
+        width: width,
+        backgroundColor: color.LIGHT_BLUE,
+        // paddingHorizontal: width * 0.04,
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingBottom: height * 0.02,
+        paddingTop: height * 0.02,
+        paddingLeft: width * 0.04,
+        borderRadius: 12,
+    },
+    shadow:{
+        shadowColor: color.WHITE,
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 5,
+        shadowRadius: 5,
+        width: width * 0.9,
+    },
+    VtitleContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: color.PRIMARY_BLUE,
+        borderTopLeftRadius: width * 0.1,
+         borderBottomLeftRadius: width * 0.1,
+        paddingVertical: height * 0.015,
+        marginLeft: width * 0.1,
+        paddingHorizontal: width * 0.1,
+    
+    },
+    title: {
+        fontSize: width * 0.06,
+        fontWeight: 'bold',
+        color: color.BLACK,
+        textAlign: 'left',
+        flex: 1,
+    },
+    backButton: {
+        padding: width * 0.02,
+        borderRadius: width * 0.05,
+        backgroundColor: color.WHITE,
+        shadowColor: color.SHADOW_BLACK,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        width: width * 0.1,
+        height: width * 0.1,
+    },
+    userCard: {
+        backgroundColor: color.WHITE,
+        marginHorizontal: width * 0.04,
+        borderRadius: height * 0.02,
+        padding: width * 0.04,
+        flexDirection: 'row',
+        alignItems: 'center',
+        elevation: 4,
+        shadowColor: color.SHADOW_BLACK,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 3,
+        marginBottom: height * 0.025,
+    },
+    avatar: {
+        width: height * 0.06,
+        height: height * 0.06,
+        borderRadius: height * 0.03,
+    },
+    username: {
+        flex: 1,
+        marginLeft: width * 0.04,
+        fontSize: width * 0.045,
+        fontWeight: 'bold',
+        color: color.BLACK,
+    },
+    notification: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    badge: {
+        backgroundColor: color.RED,
+        borderRadius: height * 0.012,
+        paddingHorizontal: width * 0.015,
+        marginLeft: width * 0.01,
+        paddingVertical: height * 0.002,
+    },
+    badgeText: {
+        color: color.WHITE,
+        fontSize: width * 0.03,
+        fontWeight: 'bold',
+    },
+    featureList: {
+        gap: height * 0.015,
+    },
+    featureItem: {
+        marginHorizontal: width * 0.04,
+        backgroundColor: color.WHITE,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: height * 0.03,
+        paddingHorizontal: width * 0.05,
+        borderRadius: height * 0.02,
+        elevation: 2,
+        shadowColor: color.SHADOW_BLACK,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+    },
+    featureIcon: {
+        width: width * 0.06,
+        height: width * 0.06,
+        marginRight: width * 0.04,
+
+    },
+    featureArrow: {
+        marginLeft: 'auto',
+        color: color.DARK_GRAY,
+    },
+    featureText: {
+        fontSize: width * 0.045,
+        color: color.DARK_GRAY,
+        fontStyle: 'italic',
+    },
+    featureTitle: {
+        marginHorizontal: width * 0.04,
+        fontSize: width * 0.05,
+        fontWeight: 'bold',
+        color: color.BLACK,
+        marginBottom: height * 0.005,
+    },
+    logoutButton: {
+        marginTop: height * 0.04,
+        backgroundColor: '#E3E7EB',
+        borderRadius: height * 0.02,
+        paddingVertical: height * 0.016,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: width * 0.02,
+    },
+    logoutText: {
+        fontSize: width * 0.045,
+        color: color.BLACK,
+        fontWeight: '600',
+    },
+});
+
+export default styles;

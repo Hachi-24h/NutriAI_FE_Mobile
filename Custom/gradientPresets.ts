@@ -1,6 +1,12 @@
 // gradientPresets.ts
 
 const gradientPresets = {
+
+
+airyOceanBlue: ['#C7E4F9', '#7BAEE7', '#FFFFFF'],
+
+
+
     // Xanh pastel - hồng pastel - tím pastel
     lavenderDream: ['#7F7FD5', '#86A8E7', '#91EAE4'],
 

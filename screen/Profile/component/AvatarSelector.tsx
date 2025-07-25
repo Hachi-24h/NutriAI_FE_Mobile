@@ -13,6 +13,7 @@ import { Menu, MenuOptions, MenuOption, MenuTrigger, MenuProvider } from 'react-
 import color from '../../../Custom/Color';
 import LinearGradient from 'react-native-linear-gradient';
 import gradientPresets from '../../../Custom/gradientPresets';
+import { ArrowLeft2 } from 'iconsax-react-native';
 
 interface Props {
   name?: string;
@@ -20,7 +21,7 @@ interface Props {
 
 const { height, width } = Dimensions.get('window');
 
-const AvatarSelector: React.FC<Props> = ({name}) => {
+const AvatarSelector: React.FC<Props> = ({ name }) => {
   const [avatarUri, setAvatarUri] = React.useState('https://i.imgur.com/K5oARFf.png');
 
   const openGallery = () => {
@@ -62,11 +63,15 @@ const AvatarSelector: React.FC<Props> = ({name}) => {
               <Image source={avatarUri ? { uri: avatarUri } : require('../../../Image/sug.png')} style={styles.avatar} />
             </LinearGradient>
           </MenuTrigger>
+        
           <MenuOptions optionsContainerStyle={styles.menuOptions}>
             <MenuOption onSelect={openGallery} text="Change avatar" style={[styles.textopt]} />
             <MenuOption onSelect={deleteAvatar} text="Delete avatar" style={styles.textopt} />
           </MenuOptions>
         </Menu>
+          <TouchableOpacity style={styles.buttonBack}>
+            <ArrowLeft2 size={height* 0.05} color={color.WHITE} />
+          </TouchableOpacity>
         <Text style={styles.name}>{name}</Text>
       </LinearGradient>
     </MenuProvider>
@@ -126,4 +131,9 @@ const styles = StyleSheet.create({
     height: width * 0.3,
     borderRadius: width * 0.15,
   },
+  buttonBack:{
+    position: 'absolute',
+    top: height * 0.02,
+    left: width * 0.05,
+  }
 });
