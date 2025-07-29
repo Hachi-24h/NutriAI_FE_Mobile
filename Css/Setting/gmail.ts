@@ -1,26 +1,62 @@
 import { StyleSheet } from 'react-native';
 import color from '../../Custom/Color';
-import { width , height} from '../../Custom/dimension';
-
+import { width , height } from '../../Custom/dimension';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: color.LIGHT_GRAY,
+    backgroundColor: color.LIGHT_BLUE,
     paddingHorizontal: width * 0.05,
     paddingTop: height * 0.02,
   },
 
-  title: {
-    fontSize: width * 0.06,
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: height * 0.015,
+  },
+
+  backButton: {
+    padding: width * 0.02,
+    backgroundColor: color.WHITE,
+    borderRadius: width * 0.04,
+    marginRight: width * 0.02,
+    shadowColor: color.SHADOW_BLACK,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 3,
+    elevation: 3,
+  },
+
+  titleBox: {
+    flex: 1,
+    backgroundColor: color.PRIMARY_BLUE,
+    borderTopLeftRadius: width * 0.05,
+    borderBottomLeftRadius: width * 0.05,
+    paddingVertical: height * 0.012,
+    paddingHorizontal: width * 0.05,
+  },
+
+  headerTitle: {
+    color: color.WHITE,
     fontWeight: 'bold',
+    fontSize: width * 0.045,
+  },
+
+  caption: {
     marginBottom: height * 0.02,
-    textAlign: 'center',
-    color: color.BLACK,
+    fontSize: width * 0.038,
+    color: color.GRAY,
+  },
+
+  listContainer: {
+    // flexGrow: 1,
+    justifyContent: 'flex-start',
   },
 
   list: {
     rowGap: height * 0.015,
+    marginBottom: height * 0.02,
   },
 
   gmailItem: {
@@ -35,6 +71,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: width * 0.01,
     elevation: 3,
+    width: '100%',
+  },
+
+  shadowItem: {
+    shadowColor: color.PRIMARY_BLUE,
+    shadowOffset: { width: -2, height: 2 },
+    shadowOpacity: 1,
+    shadowRadius: 0.5,
+    elevation: 3,
+    width: width * 0.9,
+    padding: width * 0.02,
   },
 
   gmailText: {
@@ -50,24 +97,24 @@ const styles = StyleSheet.create({
     borderRadius: width * 0.025,
   },
 
-  deleteText: {
-    color: color.WHITE,
-    fontWeight: 'bold',
-    fontSize: width * 0.035,
-  },
-
-  addButton: {
-    marginTop: height * 0.03,
-    backgroundColor: color.PRIMARY_BLUE,
-    paddingVertical: height * 0.015,
-    borderRadius: width * 0.03,
+  addWrapper: {
+    marginTop: height * 0.015,
     alignItems: 'center',
   },
 
-  addButtonText: {
-    color: color.WHITE,
-    fontSize: width * 0.04,
-    fontWeight: 'bold',
+  floatingAdd: {
+    backgroundColor: color.WHITE,
+    borderRadius: width * 0.1,
+    padding: width * 0.015,
+    shadowColor: color.SHADOW_BLACK,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: width * 0.14,
+    height: width * 0.14,
   },
 
   modalContainer: {
