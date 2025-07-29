@@ -4,7 +4,6 @@ import {
   View,
   Text,
   Switch,
-  FlatList,
   StyleSheet,
   Dimensions,
   ScrollView,
@@ -75,8 +74,8 @@ const groupedSettings = {
 
 const NotificationSettingsScreen = () => {
   const [masterSwitch, setMasterSwitch] = useState(true);
-  const [settings, setSettings] = useState(() => {
-    const all = {};
+  const [settings, setSettings] = useState<Record<string, boolean>>(() => {
+    const all: Record<string, boolean> = {};
     Object.values(groupedSettings).flat().forEach(i => (all[i.id] = true));
     return all;
   });

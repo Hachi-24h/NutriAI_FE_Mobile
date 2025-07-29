@@ -19,6 +19,9 @@ import Animated, {
     SlideInLeft,
     SlideInRight,
 } from 'react-native-reanimated';
+import BiometricToggle from './BiometricToggle';
+import { useLogout } from '../../Utils/useLogout';
+
 
 const features = [
     {
@@ -28,32 +31,32 @@ const features = [
         subItems: [
             'Change Password',
             'Add / Remove Gmail',
-            'Fingerprint Setup'
+            'biometric-switch'  // đánh dấu đặc biệt
         ],
-        navigation: ['changePassword', 'addGmail', 'fingerprintSetup']
+        navigation: ['forgotPassword', 'addordel', 'bidfghjometric']
     },
     {
         id: '2',
         name: 'Notification Settings',
-        icon: require('../../Icon/edit.png'),
+        icon: require('../../Icon/noti_set.png'),
         navigation: 'notisetting',
     },
     {
         id: '3',
         name: 'AI Assistant',
-        icon: require('../../Icon/edit.png'),
-        navigation: 'aiAssistant',
+        icon: require('../../Icon/ai_set.png'),
+        navigation: 'chatAI',
     },
     {
         id: '4',
         name: 'Help & Support',
-        icon: require('../../Icon/edit.png'),
-        navigation: 'helpSupport',
+        icon: require('../../Icon/sup_set.png'),
+        navigation: 'support',
     },
 ];
 
 const SettingScreen = ({ navigation }: any) => {
-
+    const logout = useLogout();
     const name = 'Thanh Nam';
     const [expandedFeatureId, setExpandedFeatureId] = useState<string | null>(null);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -63,7 +66,7 @@ const SettingScreen = ({ navigation }: any) => {
             if (timeoutRef.current) clearTimeout(timeoutRef.current);
             timeoutRef.current = setTimeout(() => {
                 setExpandedFeatureId(null);
-            }, 10000);
+            }, 100000);
         }
         return () => {
             if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -115,8 +118,15 @@ const SettingScreen = ({ navigation }: any) => {
                             style={styles.Vmenu}
                             onPress={() => navigation.navigate(item.navigation[subIndex])}
                         >
-                            <Text style={styles.subItemText}>{sub}</Text>
-                            <ArrowRight2 size={20} color={color.BLACK} variant="TwoTone" style={styles.featureArrowmenu} />
+                            {sub === 'biometric-switch' ? (
+                                <BiometricToggle />
+                            ) : (
+                                <>
+                                    <Text style={styles.subItemText}>{sub}</Text>
+                                    <ArrowRight2 size={20} color={color.BLACK} variant="TwoTone" style={styles.featureArrowmenu} />
+                                </>
+                            )}
+
                         </TouchableOpacity>
                     </Animated.View>
                 ))
@@ -167,7 +177,7 @@ const SettingScreen = ({ navigation }: any) => {
                 contentContainerStyle={styles.featureList}
             />
 
-            <TouchableOpacity style={styles.logoutButton}>
+            <TouchableOpacity style={styles.logoutButton} onPress={logout}>
                 <LogoutCurve size={22} color={color.BLACK} />
                 <Text style={styles.logoutText}>Log out</Text>
             </TouchableOpacity>

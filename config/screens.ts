@@ -15,6 +15,10 @@ import profile from '../screen/Profile/ProfileScreen';
 import healthinfo from '../screen/Profile/component/HealthInfo';
 import setting from '../screen/Setting/Setting';
 import notisetting from '../screen/Setting/NotificationSetting';
+import support from '../screen/Setting/Support';
+import chatAI from '../screen/Setting/ChatAI';
+import addordel from '../screen/Setting/AddOrdelGmail';
+
 export default {
 
   Demo,
@@ -31,5 +35,8 @@ export default {
   // setting
   setting,
   notisetting,
+  support ,
+  chatAI,
+  addordel
 
 };

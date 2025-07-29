@@ -13,7 +13,7 @@ const defaultOptions = {
 };
 
 const App = () => {
-  const initialScreen= 'setting'; //
+  const initialScreen= 'addordel'; //
 
   return (
     <NavigationContainer>

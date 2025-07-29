@@ -89,7 +89,7 @@ const SignInScreen = ({ navigation }: any) => {
         </View>
 
         <View style={styles.Vsignin}>
-          <TouchableOpacity style={styles.signInButton}>
+          <TouchableOpacity style={styles.signInButton} onPress={() => navigation.navigate('home')}>
             <Text style={styles.signInButtonText}>Sign In</Text>
           </TouchableOpacity>
           <TouchableOpacity

@@ -9,8 +9,10 @@ import {
     Dimensions,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Home,  Scan, Setting2, Notification, Chart } from 'iconsax-react-native';
+import { Home, Scan, Setting2, Notification, Chart } from 'iconsax-react-native';
 import color from '../../Custom/Color';
+import { useNavigation } from '@react-navigation/native';
+
 
 
 
@@ -19,19 +21,27 @@ const { width, height } = Dimensions.get('window');
 
 
 const Footer = () => {
+    const navigation = useNavigation();
+    const nagi = ['home', 'reports', 'notification', 'setting'];
 
+
+   
     return (
 
         <View style={styles.footerContainer}>
             <View style={styles.halfCircle} />
-          
+
             <View style={[styles.buttonfuntion,]} >
-                <TouchableOpacity style={styles.navItem}>
+                <TouchableOpacity style={styles.navItem} 
+                onPress={() =>  navigation.navigate(nagi[0] as never)}
+                    >
                     <Home size={24} color={color.PRIMARY_BLUE} />
                     <Text style={styles.activeLabel}>Home</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={[styles.navItem]}>
+                <TouchableOpacity style={[styles.navItem]}
+                     onPress={() =>  navigation.navigate(nagi[0] as never)}
+                    >
                     <Chart size={24} color="#999" />
                     <Text style={styles.label}>Reports</Text>
                 </TouchableOpacity>
@@ -48,12 +58,16 @@ const Footer = () => {
                 </LinearGradient>
             </View>
             <View style={[styles.buttonfuntion]} >
-                <TouchableOpacity style={styles.navItem}>
+                <TouchableOpacity style={styles.navItem}
+                     onPress={() =>  navigation.navigate(nagi[0] as never)}
+                    >
                     <Notification size={24} color="#999" />
                     <Text style={styles.label}>Notification</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.navItem}>
+                <TouchableOpacity style={styles.navItem}
+                     onPress={() =>  navigation.navigate(nagi[3] as never)}
+                    >
                     <Setting2 size={24} color="#999" />
                     <Text style={styles.label}>Setting</Text>
                 </TouchableOpacity>
@@ -141,5 +155,5 @@ const styles = StyleSheet.create({
         transform: [{ rotate: '180deg' }]
 
     },
- 
+
 });
