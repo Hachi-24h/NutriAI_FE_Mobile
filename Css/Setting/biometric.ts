@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import color from "../../Custom/Color";
-import { height, width } from "../../Custom/dimension";
+import { width } from "../../Custom/dimension";
 // import { width, height } from "../../Custom/dimension";
 const styles = StyleSheet.create({
   modalOverlay: {
