@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     },
     suggestionBox: {
         flexDirection: 'row',
-        backgroundColor: color.WHITE,
+        backgroundColor: color.LIGHT_BLUE,
         width: '100%',
         paddingVertical: height * 0.04,
     },
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         lineHeight: 20,
         textAlign: 'left',
-        padding:height* 0.01,
+        padding: height * 0.01,
     },
     Vtextsugestion: {
         backgroundColor: color.WHITE,
@@ -220,7 +220,8 @@ const styles = StyleSheet.create({
     suggestionImage: {
         width: 50,
         height: 50,
-    }
+    },
+   
 });
 
 export default styles;

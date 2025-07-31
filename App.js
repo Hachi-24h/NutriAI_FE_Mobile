@@ -13,7 +13,7 @@ const defaultOptions = {
 };
 
 const App = () => {
-  const initialScreen= 'addordel'; //
+  const initialScreen= 'signin'; //
 
   return (
     <NavigationContainer>

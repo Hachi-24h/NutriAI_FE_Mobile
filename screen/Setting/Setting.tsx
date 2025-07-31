@@ -12,6 +12,7 @@ import color from '../../Custom/Color';
 import LinearGradient from 'react-native-linear-gradient';
 import gradientPresets from '../../Custom/gradientPresets';
 import DropShadow from 'react-native-drop-shadow';
+
 import Animated, {
     SlideInDown,
     Layout,
@@ -19,8 +20,8 @@ import Animated, {
     SlideInLeft,
     SlideInRight,
 } from 'react-native-reanimated';
-import BiometricToggle from './BiometricToggle';
 import { useLogout } from '../../Utils/useLogout';
+import BiometricToggle from './BiometricToggle';
 
 
 const features = [
@@ -54,6 +55,7 @@ const features = [
         navigation: 'support',
     },
 ];
+const sdt = "0379664714";
 
 const SettingScreen = ({ navigation }: any) => {
     const logout = useLogout();
@@ -77,7 +79,7 @@ const SettingScreen = ({ navigation }: any) => {
         if (item.id === '1') {
             // Với Account Settings: toggle submenu
             setExpandedFeatureId(expandedFeatureId === item.id ? null : item.id);
-        } else if (item.navigation) {
+        } else if (item.navigation && item.navigation !== 'biometric-switch') {
             // Với các nút chính khác → chuyển trang luôn
             navigation.navigate(item.navigation);
         }
@@ -119,7 +121,7 @@ const SettingScreen = ({ navigation }: any) => {
                             onPress={() => navigation.navigate(item.navigation[subIndex])}
                         >
                             {sub === 'biometric-switch' ? (
-                                <BiometricToggle />
+                               <BiometricToggle phone={sdt} />
                             ) : (
                                 <>
                                     <Text style={styles.subItemText}>{sub}</Text>
@@ -185,5 +187,8 @@ const SettingScreen = ({ navigation }: any) => {
         </LinearGradient>
     );
 };
+
+
+
 
 export default SettingScreen;

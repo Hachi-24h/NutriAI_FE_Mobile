@@ -37,7 +37,7 @@ const GmailManagerScreen = () => {
       Alert.alert('Invalid Gmail', 'Please enter a valid Gmail address.');
       return;
     }
-
+    // navigation.navigate();
     Alert.alert(
       'Confirm Gmail',
       `Are you sure this is your Gmail?\n\n${tempGmail}`,

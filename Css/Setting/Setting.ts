@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         shadowRadius: 0,
         width: width * 1,
     },
-     shadowfeature: {
+    shadowfeature: {
         shadowOffset: { width: -10, height: 5 },
         shadowOpacity: 1,
         shadowRadius: 2,
@@ -111,13 +111,13 @@ const styles = StyleSheet.create({
         marginLeft: 'auto',
         color: color.DARK_GRAY,
     },
-    Vmenu:{
+    Vmenu: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: width * 0.02,
     },
-    featureArrowmenu:{
+    featureArrowmenu: {
 
     },
     featureText: {
@@ -159,6 +159,15 @@ const styles = StyleSheet.create({
     subItemText: {
         fontSize: width * 0.04,
         color: color.BLACK,
+    },
+    buttonbiometric: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingVertical: width * 0.02,
+        paddingHorizontal: width * 0.05,
+        backgroundColor: color.WHITE,
+        width: '100%',
     },
 });
 

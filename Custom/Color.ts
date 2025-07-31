@@ -1,7 +1,7 @@
 // color.ts
 
 const color: { [key: string]: string } = {
-
+  GREEN: "#25A18E",
   PRIMARY_BLUE: '#2F80ED',
   LIGHT_BLUE: '#E3F2FD',
   BACK_BLUE: '#81CDF5', // Màu xanh nhạt

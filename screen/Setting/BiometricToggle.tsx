@@ -18,7 +18,7 @@ import { width } from '../../Custom/dimension';
 
 const rnBiometrics = new ReactNativeBiometrics();
 
-const BiometricToggle = () => {
+const BiometricToggle = ({ phone }: { phone: string }) => {
   const [enabled, setEnabled] = useState(false);
   const [modalType, setModalType] = useState<'enable' | 'confirm-disable' | null>(null);
   const [password, setPassword] = useState('');
@@ -56,34 +56,40 @@ const BiometricToggle = () => {
     const { publicKey } = await rnBiometrics.createKeys();
     if (publicKey) {
       await AsyncStorage.setItem('biometricEnabled', 'true');
+      await AsyncStorage.setItem('biometricPhone', phone); // ✅ Lưu SDT
       setEnabled(true);
       closeModal();
-      Alert.alert('Biometric login enabled!');
+   
     }
   };
 
   const handleConfirmDisable = async () => {
+    await rnBiometrics.deleteKeys();
     await AsyncStorage.setItem('biometricEnabled', 'false');
+    await AsyncStorage.removeItem('biometricPhone'); // ✅ Xóa SDT khi tắt
     setEnabled(false);
     closeModal();
-    Alert.alert('Biometric login disabled');
+ 
   };
 
   const closeModal = () => {
     setModalType(null);
     setPassword('');
     setError('');
+    setShowPassword(false);
   };
 
   return (
     <>
+      {/* Toggle UI */}
       <TouchableOpacity onPress={handlePress} style={styles.container}>
-        <Text style={{fontSize: width * 0.04}}>Allow biometric login</Text>
-        <Text style={{ color: enabled ? color.DARK_BLUE : color.GRAY, fontWeight: 'bold',      }}>
+        <Text style={{ fontSize: width * 0.04 }}>Allow biometric login</Text>
+        <Text style={{ color: enabled ? color.GREEN : color.GRAY, fontWeight: 'bold' }}>
           {enabled ? 'Enabled' : 'Disabled'}
         </Text>
       </TouchableOpacity>
 
+      {/* Modal bật: nhập mật khẩu */}
       <Modal visible={modalType === 'enable'} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <KeyboardAvoidingView
@@ -123,6 +129,7 @@ const BiometricToggle = () => {
         </View>
       </Modal>
 
+      {/* Modal tắt: xác nhận */}
       <Modal visible={modalType === 'confirm-disable'} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={[styles.modalBox, { padding: 24 }]}>
