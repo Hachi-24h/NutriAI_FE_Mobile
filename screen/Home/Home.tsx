@@ -19,14 +19,36 @@ import TodayOverview from './component/TodayOverview';
 import gradientPresets from '../../Custom/gradientPresets';
 import Footer from '../other/footer';
 import SideMenu from './component/SideMenu';
+import { useLogout } from '../../Utils/useLogout';
 
 
-const Home = () => {
+const Home = ({navigation}: any) => {
     const tip = " Stay hydrated to keep your metabolism running efficiently! "
     const [menuVisible, setMenuVisible] = useState(false);
-
+    const logout = useLogout();
     const handleMenuSelect = (option: string) => {
-        console.log('Selected:', option);
+        switch (option) {
+            case 'Profile':
+                navigation.navigate('profile');
+                break;
+            case 'Meal History':
+                navigation.navigate('mealHistory');
+                break;
+            case 'Settings':
+                navigation.navigate('setting');
+                break;
+            case 'Tutorial':
+                navigation.navigate('tutorial');
+                break;
+            case 'Change Password':
+                navigation.navigate('forgotPassword');
+                break;
+            case 'Logout':
+                logout();
+                break;
+            default:
+                break;
+        }
         setMenuVisible(false);
     };
     return (
@@ -69,7 +91,7 @@ const Home = () => {
                         </Text>
                     </View>
                 </View>
-                
+
 
                 {/* Chức năng */}
                 <View>

@@ -14,7 +14,7 @@ import { Eye, EyeSlash } from 'iconsax-react-native';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import color from '../../Custom/Color';
 import styles from '../../Css/Setting/biometric';
-import { width } from '../../Custom/dimension';
+import { width } from '../../Utils/dimension';
 
 const rnBiometrics = new ReactNativeBiometrics();
 

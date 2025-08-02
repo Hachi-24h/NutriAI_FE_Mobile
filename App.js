@@ -13,9 +13,10 @@ const defaultOptions = {
 };
 
 const App = () => {
-  const initialScreen= 'signin'; //
+  const initialScreen= 'demo'; //
 
   return (
+<>
     <NavigationContainer>
       <Stack.Navigator
         id="root"
@@ -37,6 +38,8 @@ const App = () => {
         ))}
       </Stack.Navigator>
     </NavigationContainer>
+  
+  </>
   );
 };
 

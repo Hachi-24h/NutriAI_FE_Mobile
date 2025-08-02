@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import color from '../../Custom/Color';
-import { width , height } from '../../Custom/dimension';
+import { width , height } from '../../Utils/dimension';
 
 const styles = StyleSheet.create({
   container: {

@@ -1,6 +1,6 @@
 // screens.js
 
-import Demo from '../screen/demo';
+import demo from '../screen/demo';
 import wellcome from '../screen/Login/wellcome';
 import splash from '../screen/Login/Splash';
 import signin from '../screen/Login/SignIn';
@@ -21,7 +21,7 @@ import addordel from '../screen/Setting/AddOrdelGmail';
 
 export default {
 
-  Demo,
+  demo,
   wellcome,
   splash,
   signin, signup, forgotPassword,
