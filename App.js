@@ -13,7 +13,7 @@ const defaultOptions = {
 };
 
 const App = () => {
-  const initialScreen= 'step'; //
+  const initialScreen= 'currentschudule'; //
 
   return (
 <>

@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: -10, height: 5 },
         shadowOpacity: 1,
         shadowRadius: 2,
-        width: width * 0.2,
+        width: width * 1,
     },
     VtitleContainer: {
         flexDirection: 'row',
@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: width * 0.05,
         borderRadius: height * 0.015,
         marginTop: 5,
+       
     },
     subItemText: {
         fontSize: width * 0.04,

@@ -25,23 +25,23 @@ const Footer = () => {
     const nagi = ['home', 'reports', 'notification', 'setting'];
 
 
-   
+
     return (
 
         <View style={styles.footerContainer}>
             <View style={styles.halfCircle} />
 
             <View style={[styles.buttonfuntion,]} >
-                <TouchableOpacity style={styles.navItem} 
-                onPress={() =>  navigation.navigate(nagi[0] as never)}
-                    >
+                <TouchableOpacity style={styles.navItem}
+                    onPress={() => navigation.navigate(nagi[0] as never)}
+                >
                     <Home size={24} color={color.PRIMARY_BLUE} />
                     <Text style={styles.activeLabel}>Home</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={[styles.navItem]}
-                     onPress={() =>  navigation.navigate(nagi[0] as never)}
-                    >
+                    onPress={() => navigation.navigate(nagi[0] as never)}
+                >
                     <Chart size={24} color="#999" />
                     <Text style={styles.label}>Reports</Text>
                 </TouchableOpacity>
@@ -59,15 +59,15 @@ const Footer = () => {
             </View>
             <View style={[styles.buttonfuntion]} >
                 <TouchableOpacity style={styles.navItem}
-                     onPress={() =>  navigation.navigate(nagi[0] as never)}
-                    >
+                    onPress={() => navigation.navigate(nagi[0] as never)}
+                >
                     <Notification size={24} color="#999" />
                     <Text style={styles.label}>Notification</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.navItem}
-                     onPress={() =>  navigation.navigate(nagi[3] as never)}
-                    >
+                    onPress={() => navigation.navigate(nagi[3] as never)}
+                >
                     <Setting2 size={24} color="#999" />
                     <Text style={styles.label}>Setting</Text>
                 </TouchableOpacity>
@@ -92,6 +92,10 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: height * 0.02,
         borderTopRightRadius: height * 0.02,
         zIndex: 0,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
     },
     buttonfuntion: {
         flexDirection: 'row',

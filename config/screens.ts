@@ -20,6 +20,8 @@ import chatAI from '../screen/Setting/ChatAI';
 import addordel from '../screen/Setting/AddOrdelGmail';
 import step from '../screen/schedule/Step'; // Importing the GoalStep component
 import summary from "../screen/schedule/Summary"
+import  completeschedule  from "../screen/schedule/CompletedSchedule"
+import  currentschudule  from "../screen/schedule/CurrentSchedule"
 export default {
 
   demo,
@@ -43,4 +45,6 @@ export default {
   // schedule
   step,
   summary,
+  completeschedule,
+  currentschudule,
 };
