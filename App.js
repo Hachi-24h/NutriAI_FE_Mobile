@@ -13,7 +13,7 @@ const defaultOptions = {
 };
 
 const App = () => {
-  const initialScreen= 'demo'; //
+  const initialScreen= 'step'; //
 
   return (
 <>

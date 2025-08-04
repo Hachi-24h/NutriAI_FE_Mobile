@@ -18,7 +18,8 @@ import notisetting from '../screen/Setting/NotificationSetting';
 import support from '../screen/Setting/Support';
 import chatAI from '../screen/Setting/ChatAI';
 import addordel from '../screen/Setting/AddOrdelGmail';
-
+import step from '../screen/schedule/Step'; // Importing the GoalStep component
+import summary from "../screen/schedule/Summary"
 export default {
 
   demo,
@@ -37,6 +38,9 @@ export default {
   notisetting,
   support ,
   chatAI,
-  addordel
+  addordel,
 
+  // schedule
+  step,
+  summary,
 };
