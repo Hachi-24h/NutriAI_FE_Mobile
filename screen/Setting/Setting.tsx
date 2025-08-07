@@ -55,7 +55,7 @@ const features = [
         navigation: 'support',
     },
 ];
-const sdt = "0379664714";
+const sdt = "0379664711";
 
 const SettingScreen = ({ navigation }: any) => {
     const logout = useLogout();
@@ -158,6 +158,7 @@ const SettingScreen = ({ navigation }: any) => {
                     </View>
                 </DropShadow>
             </Animated.View>
+            
             <DropShadow style={[styles.shadowfeature, { shadowColor: gradientPresets.cottonCandyFade[0] }]}>
                 <TouchableOpacity onPress={handleUserCardPress} activeOpacity={0.8}>
                     <Animated.View entering={SlideInLeft.duration(300).delay(50)} style={styles.userCard}>

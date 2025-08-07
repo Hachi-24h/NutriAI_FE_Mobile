@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity ,} from 'react-native';
 
 type CompletedPlan = {
   id: string;
@@ -13,7 +13,7 @@ const completedPlans: CompletedPlan[] = [
   { id: '2', title: 'Low Carb', startDate: '2025-06-15', endDate: '2025-06-21' },
 ];
 
-const CompletedSchedulesScreen = () => {
+const CompletedSchedulesScreen = ({navigation}:any) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Completed Meal Plans</Text>
@@ -21,10 +21,11 @@ const CompletedSchedulesScreen = () => {
         data={completedPlans}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.card}>
+          <TouchableOpacity style={styles.card} onPress={()=> navigation.navigate("currentschudule")} >
+
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.date}>From: {item.startDate} → {item.endDate}</Text>
-          </View>
+          </TouchableOpacity>
         )}
       />
     </View>
