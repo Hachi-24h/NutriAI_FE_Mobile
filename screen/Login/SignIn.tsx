@@ -14,10 +14,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import axios from 'axios';
 import { IP_AUTH } from '../../config/Ipconfig';
+import { IP_USER} from '../../config/Ipconfig';
+import { useDispatch } from "react-redux";
+import { setAuth } from "../../redux/slice/authSlice";
+import { setUser } from "../../redux/slice/userSlice";
 
 const SignInScreen = ({ navigation }: any) => {
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUserName] = useState('');
+  const dispatch = useDispatch();
   const handleBiometricLogin = async () => {
     const enabled = await AsyncStorage.getItem('biometricEnabled');
     const savedPhone = await AsyncStorage.getItem('biometricPhone');
@@ -55,38 +60,56 @@ const SignInScreen = ({ navigation }: any) => {
       offlineAccess: false,
     });
   }, []);
-  console.log('Google Sign-In configured');
-  const handleLoginGoogle = async () => {
-    try {
-      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-      const result = await GoogleSignin.signIn();
 
-      const idToken = result?.data?.idToken;
-      if (!idToken) {
-        Alert.alert("❌ Không lấy được idToken từ Google");
-        return;
-      }
-      console.log('Google ID Token:', idToken);
-      // Gửi lên backend
-      const linkapi = `${IP_AUTH}/google`;
-      console.log('Sending ID token to backend:', linkapi);
-      const res = await axios.post(linkapi, {
-        id_token: idToken,
-      });
 
-      const { access_token, refresh_token } = res.data;
+const handleLoginGoogle = async () => {
+  try {
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    const result = await GoogleSignin.signIn();
+    // console.log("Google Login Result:", result);
 
-      // Lưu token để dùng sau này
-      await AsyncStorage.setItem("accessToken", access_token);
-      await AsyncStorage.setItem("refreshToken", refresh_token);
-
-      Alert.alert("✅ Đăng nhập Google thành công!");
-      navigation.navigate("home");
-    } catch (e: any) {
-      console.log("Google Login Error:", e.response?.data || e.message);
-      Alert.alert("❌ Đăng nhập Google thất bại");
+    const idToken = result?.data?.idToken;
+    if (!idToken) {
+      Alert.alert("❌ Không lấy được idToken từ Google");
+      return;
     }
-  };
+
+    // 1) Gọi backend auth-service để login
+    const res = await axios.post(`${IP_AUTH}/google`, { id_token: idToken });
+    const { access_token, refresh_token } = res.data;
+
+    // 2) Lưu token vào Redux
+    dispatch(setAuth({ accessToken: access_token, refreshToken: refresh_token }));
+
+    // 3) Gọi song song user-service và auth-service
+    const [profileRes, authRes] = await Promise.all([
+      axios.get(`${IP_USER}/me`, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      }),
+      axios.get(`${IP_AUTH}/me`, {
+        headers: { Authorization: `Bearer ${access_token}` },
+      }),
+    ]);
+
+    // 4) Gộp dữ liệu
+    const mergedUser = {
+      ...profileRes.data,
+      email: authRes.data.email,
+      phone: authRes.data.phone,
+      role: authRes.data.role,
+    };
+
+    // 5) Lưu user đầy đủ vào Redux
+    dispatch(setUser(mergedUser));
+
+    Alert.alert("✅ Đăng nhập Google thành công!");
+    navigation.navigate("demo"); // hoặc "home"
+  } catch (e: any) {
+    console.log("Google Login Error:", e.response?.data || e.message);
+    Alert.alert("❌ Đăng nhập Google thất bại");
+  }
+};
+
 
 
   return (
