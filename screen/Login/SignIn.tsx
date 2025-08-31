@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -9,10 +9,11 @@ import {
 import styles from '../../Css/login/signin';
 import color from '../../Custom/Color';
 import { Eye, EyeSlash } from 'iconsax-react-native';
-
+import { GoogleSignin, } from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ReactNativeBiometrics from 'react-native-biometrics';
-
+import axios from 'axios';
+import { IP_AUTH } from '../../config/Ipconfig';
 
 const SignInScreen = ({ navigation }: any) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -46,6 +47,47 @@ const SignInScreen = ({ navigation }: any) => {
         Alert.alert('❌ Lỗi xác thực!');
       });
   };
+
+  useEffect(() => {
+    // Dán WEB CLIENT ID vào đây ở bước 3B (sau khi tạo trên Google Cloud)
+    GoogleSignin.configure({
+      webClientId: '202383989285-a81k146s59id7n0uhjuetbtjlj7oob8l.apps.googleusercontent.com',
+      offlineAccess: false,
+    });
+  }, []);
+  console.log('Google Sign-In configured');
+  const handleLoginGoogle = async () => {
+    try {
+      await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+      const result = await GoogleSignin.signIn();
+
+      const idToken = result?.data?.idToken;
+      if (!idToken) {
+        Alert.alert("❌ Không lấy được idToken từ Google");
+        return;
+      }
+      console.log('Google ID Token:', idToken);
+      // Gửi lên backend
+      const linkapi = `${IP_AUTH}/google`;
+      console.log('Sending ID token to backend:', linkapi);
+      const res = await axios.post(linkapi, {
+        id_token: idToken,
+      });
+
+      const { access_token, refresh_token } = res.data;
+
+      // Lưu token để dùng sau này
+      await AsyncStorage.setItem("accessToken", access_token);
+      await AsyncStorage.setItem("refreshToken", refresh_token);
+
+      Alert.alert("✅ Đăng nhập Google thành công!");
+      navigation.navigate("home");
+    } catch (e: any) {
+      console.log("Google Login Error:", e.response?.data || e.message);
+      Alert.alert("❌ Đăng nhập Google thất bại");
+    }
+  };
+
 
   return (
     <View style={styles.container}>
@@ -107,7 +149,7 @@ const SignInScreen = ({ navigation }: any) => {
 
         {/* Hoặc sử dụng Google / Facebook */}
         <View style={styles.socialButtons}>
-          <TouchableOpacity style={styles.socialButton}>
+          <TouchableOpacity style={styles.socialButton} onPress={handleLoginGoogle} >
             <Image
               source={{ uri: 'https://img.icons8.com/color/48/google-logo.png' }}
               style={styles.icon}

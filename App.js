@@ -13,7 +13,7 @@ const defaultOptions = {
 };
 
 const App = () => {
-  const initialScreen= 'currentschudule'; //
+  const initialScreen= 'signin'; //
 
   return (
 <>
