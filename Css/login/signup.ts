@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
         borderTopRightRadius: height * 0.04,
         paddingHorizontal: width * 0.07,
         paddingTop: height * 0.05,
+        
+        
     },
     label: {
         fontSize: height * 0.02,
@@ -40,13 +42,15 @@ const styles = StyleSheet.create({
         color: color.BLACK,
         marginBottom: height * 0.01,
         paddingLeft: height * 0.01,
+        
     },
     input: {
         backgroundColor: color.LIGHT_GRAY,
-        borderRadius: 30,
+        borderRadius:height * 0.03,
         paddingHorizontal: height * 0.03,
         paddingVertical: height * 0.02,
-        marginBottom: 16,
+        marginBottom: height*0.01,
+        width: "99%",
     },
     signUpButton: {
         backgroundColor: color.BLACK,
@@ -109,5 +113,23 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: color.BLACK,
     },
+    error:{
+        borderColor: 'red',borderWidth:1
+    },
+    errorText :{
+        color: color.RED,
+        marginBottom: height * 0.005,
+        paddingLeft:width*0.05,
+    },
+    showPasswordButton:{
+        position: "absolute",
+        right: width*0.08,
+        top: "20%",
+        
+        zIndex:999,
+        padding:width*0.01,
+        
+       
+    }
 });
 export default styles;

@@ -20,7 +20,7 @@ import Animated, {
     SlideInLeft,
     SlideInRight,
 } from 'react-native-reanimated';
-import { useLogout } from '../../Utils/useLogout';
+
 import BiometricToggle from './BiometricToggle';
 
 
@@ -55,10 +55,16 @@ const features = [
         navigation: 'support',
     },
 ];
-const sdt = "0379664711";
+import { useDispatch } from "react-redux";
+import { authService } from "../../services/authService";
+
+
+
 
 const SettingScreen = ({ navigation }: any) => {
-    const logout = useLogout();
+    const dispatch = useDispatch();
+    const sdt = "0379664711";
+
     const name = 'Thanh Nam';
     const [expandedFeatureId, setExpandedFeatureId] = useState<string | null>(null);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -180,7 +186,7 @@ const SettingScreen = ({ navigation }: any) => {
                 contentContainerStyle={styles.featureList}
             />
 
-            <TouchableOpacity style={styles.logoutButton} onPress={logout}>
+            <TouchableOpacity style={styles.logoutButton} onPress={() => authService.logout(dispatch, navigation)} >
                 <LogoutCurve size={22} color={color.BLACK} />
                 <Text style={styles.logoutText}>Log out</Text>
             </TouchableOpacity>

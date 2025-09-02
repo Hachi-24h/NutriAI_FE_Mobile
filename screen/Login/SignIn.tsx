@@ -12,17 +12,15 @@ import { Eye, EyeSlash } from 'iconsax-react-native';
 import { GoogleSignin, } from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ReactNativeBiometrics from 'react-native-biometrics';
-import axios from 'axios';
-import { IP_AUTH } from '../../config/Ipconfig';
-import { IP_USER} from '../../config/Ipconfig';
 import { useDispatch } from "react-redux";
-import { setAuth } from "../../redux/slice/authSlice";
-import { setUser } from "../../redux/slice/userSlice";
+import { authService } from "../../services/authService";
 
 const SignInScreen = ({ navigation }: any) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('nam123');
+  const [Phone, setPhone] = useState('0379664715');
   const dispatch = useDispatch();
+
   const handleBiometricLogin = async () => {
     const enabled = await AsyncStorage.getItem('biometricEnabled');
     const savedPhone = await AsyncStorage.getItem('biometricPhone');
@@ -32,7 +30,7 @@ const SignInScreen = ({ navigation }: any) => {
       return;
     }
 
-    if (username !== savedPhone) {
+    if (Phone !== savedPhone) {
       Alert.alert('Số điện thoại không khớp với vân tay đã đăng ký');
       return;
     }
@@ -66,49 +64,45 @@ const handleLoginGoogle = async () => {
   try {
     await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
     const result = await GoogleSignin.signIn();
-    // console.log("Google Login Result:", result);
+    console.log("Google Login Result:", result);
 
-    const idToken = result?.data?.idToken;
-    if (!idToken) {
+    if (!result?.data?.idToken) {
       Alert.alert("❌ Không lấy được idToken từ Google");
       return;
     }
 
-    // 1) Gọi backend auth-service để login
-    const res = await axios.post(`${IP_AUTH}/google`, { id_token: idToken });
-    const { access_token, refresh_token } = res.data;
+    await authService.loginWithGoogle(result.data.idToken, dispatch, navigation);
 
-    // 2) Lưu token vào Redux
-    dispatch(setAuth({ accessToken: access_token, refreshToken: refresh_token }));
-
-    // 3) Gọi song song user-service và auth-service
-    const [profileRes, authRes] = await Promise.all([
-      axios.get(`${IP_USER}/me`, {
-        headers: { Authorization: `Bearer ${access_token}` },
-      }),
-      axios.get(`${IP_AUTH}/me`, {
-        headers: { Authorization: `Bearer ${access_token}` },
-      }),
-    ]);
-
-    // 4) Gộp dữ liệu
-    const mergedUser = {
-      ...profileRes.data,
-      email: authRes.data.email,
-      phone: authRes.data.phone,
-      role: authRes.data.role,
-    };
-
-    // 5) Lưu user đầy đủ vào Redux
-    dispatch(setUser(mergedUser));
-
-    Alert.alert("✅ Đăng nhập Google thành công!");
-    navigation.navigate("demo"); // hoặc "home"
   } catch (e: any) {
     console.log("Google Login Error:", e.response?.data || e.message);
     Alert.alert("❌ Đăng nhập Google thất bại");
   }
 };
+
+const handleLoginPassword = async () => {
+  try {
+    if (!Phone || !password) {
+      Alert.alert("❌ Thiếu thông tin", "Vui lòng nhập số điện thoại/email và mật khẩu");
+      return;
+    }
+
+    await authService.loginWithPassword(Phone, password, dispatch, navigation);
+
+  } catch (e: any) {
+    const status = e.response?.status;
+    const message = e.response?.data?.message || e.message;
+
+    if (status === 404) {
+      Alert.alert("❌ Tài khoản chưa đăng ký", "Vui lòng đăng ký trước khi đăng nhập.");
+    } else if (status === 401) {
+      Alert.alert("❌ Sai mật khẩu", "Vui lòng kiểm tra lại mật khẩu.");
+    } else {
+      Alert.alert("❌ Đăng nhập thất bại", message);
+    }
+  }
+};
+
+
 
 
 
@@ -125,11 +119,12 @@ const handleLoginGoogle = async () => {
 
       {/* Form trắng */}
       <View style={styles.formSection}>
-        <TextInput
+        <TextInput  
           style={styles.input}
-          placeholder="Username"
+          placeholder="Phone "
           placeholderTextColor={color.GRAY}
-          onChangeText={setUserName}
+          onChangeText={setPhone}
+          value={Phone}
         />
         <View style={styles.passwordContainer}>
           <TextInput
@@ -137,6 +132,8 @@ const handleLoginGoogle = async () => {
             placeholder="Password"
             placeholderTextColor={color.GRAY}
             secureTextEntry={!showPassword}
+            onChangeText={setPassword}
+            value={password}
           />
           <TouchableOpacity
             style={styles.iconEye}
@@ -154,7 +151,7 @@ const handleLoginGoogle = async () => {
         </View>
 
         <View style={styles.Vsignin}>
-          <TouchableOpacity style={styles.signInButton} onPress={() => navigation.navigate('home')}>
+          <TouchableOpacity style={styles.signInButton} onPress={handleLoginPassword}>
             <Text style={styles.signInButtonText}>Sign In</Text>
           </TouchableOpacity>
           <TouchableOpacity
