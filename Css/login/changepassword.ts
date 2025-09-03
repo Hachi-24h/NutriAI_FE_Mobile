@@ -78,5 +78,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '600',
     },
+     errorText :{
+        color: color.RED,
+        marginBottom: height * 0.005,
+        paddingLeft:width*0.05,
+    },
+    error:{
+        borderColor: 'red',borderWidth:1
+    }
 });
 export default styles;

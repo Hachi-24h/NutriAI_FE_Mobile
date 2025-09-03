@@ -14,6 +14,7 @@ import {
 import OTPTextInput from 'react-native-otp-textinput';
 import color from '../../Custom/Color';
 import { Keyboard } from 'react-native';
+import { ArrowLeft } from 'iconsax-react-native';
 const { width, height } = Dimensions.get('window');
 
 
@@ -32,6 +33,10 @@ const ForgotPassword = ({ navigation }: any) => {
         setTimer(60);
         Keyboard.dismiss(); // 👈 Tắt bàn phím
     };
+    const handleBackscreend
+        = () => {
+            navigation.goBack();
+        };
 
     const handleSubmitOtp = () => {
         console.log('OTP submitted:', otpCode);
@@ -39,8 +44,8 @@ const ForgotPassword = ({ navigation }: any) => {
             Alert.alert('Please enter a valid 6-digit OTP');
             return;
         }
-        if (otpCode === '123456') { // Example validation
-            navigation.navigate('changePassword');
+        if (otpCode === '123456') { 
+            navigation.navigate('changePassword', { phoneoremail: input });
 
             setOtpModalVisible(false);
             Keyboard.dismiss(); // 👈 Tắt bàn phím
@@ -87,7 +92,9 @@ const ForgotPassword = ({ navigation }: any) => {
             <TouchableOpacity style={styles.submitButton} onPress={handleContinue}>
                 <Text style={styles.buttonText}>Continue</Text>
             </TouchableOpacity>
-
+            <TouchableOpacity style={styles.backicon} onPress={handleBackscreend}>
+                <ArrowLeft size={height * 0.04} color={color.BLACK} />
+            </TouchableOpacity>
             {/* OTP Modal */}
             <Modal
                 visible={otpModalVisible}
@@ -127,7 +134,7 @@ const ForgotPassword = ({ navigation }: any) => {
                         </View>
                         <View style={{ flexDirection: 'row' }}>
 
-                            <TouchableOpacity style={[styles.submitButton_modal, { backgroundColor: color.RED }]} onPress={handleSubmitOtp}>
+                            <TouchableOpacity style={[styles.submitButton_modal, { backgroundColor: color.RED }]} onPress={() => setOtpModalVisible(false)}>
                                 <Text style={styles.buttonText}>Cancel</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={[styles.submitButton_modal, { backgroundColor: color.PRIMARY_BLUE }]} onPress={handleSubmitOtp}>
@@ -281,6 +288,12 @@ const styles = StyleSheet.create({
         color: color.PRIMARY_BLUE,
         fontWeight: '500',
     },
+    backicon: {
+        position: "absolute",
+        top: height * 0.02,
+        left: width * 0.03,
+
+    }
 });
 
 export default ForgotPassword;

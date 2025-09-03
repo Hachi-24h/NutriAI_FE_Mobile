@@ -4,6 +4,7 @@ import { authApi, userApi } from "../api/axiosClient";
 import { setAuth, clearAuth } from "../redux/slice/authSlice";
 import { setUser, clearUser } from "../redux/slice/userSlice";
 import { store } from "../redux/store";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 
 export const authService = {
@@ -83,11 +84,18 @@ logout: async (dispatch: any, navigation: any) => {
       await authApi.post("/logout", { refresh_token: refreshToken });
     }
 
+    // 👇 Thêm bước này: xóa cache Google account
+    try {
+      await GoogleSignin.signOut();
+      // hoặc: await GoogleSignin.revokeAccess();
+    } catch (err) {
+      console.log("Google SignOut Error:", err);
+    }
+
     dispatch(clearAuth());
     dispatch(clearUser());
     await AsyncStorage.multiRemove(["accessToken", "refreshToken"]);
 
-    // 👇 Reset navigation: xoá hết stack, chỉ để lại "signin"
     navigation.reset({
       index: 0,
       routes: [{ name: "signin" }],
@@ -157,6 +165,21 @@ register: async (
     navigation.navigate("home");
   } catch (err: any) {
     console.log("Register Error:", err.response?.data || err.message);
+    throw err;
+  }
+},
+
+
+// change password by phone
+resetPasswordByPhone: async (phone: string, newPassword: string) => {
+  try {
+    const res = await authApi.post("/change-password", {
+      phone,
+      newPassword,
+    });
+    return res.data; // { message: "Password has been reset successfully" }
+  } catch (err: any) {
+    console.log("Reset Password Error:", err.response?.data || err.message);
     throw err;
   }
 },
