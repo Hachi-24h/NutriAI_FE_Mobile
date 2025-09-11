@@ -15,12 +15,12 @@ export const userService = {
   },
 
   // Cập nhật thông tin người dùng
-    updateProfile: async (
+  updateProfile: async (
     payload: {
-    fullname?: string;
-    DOB?: string;
-    gender?: "MALE" | "FEMALE" | "OTHER";
-  }) => {
+      fullname?: string;
+      DOB?: string;
+      gender?: "MALE" | "FEMALE" | "OTHER";
+    }) => {
     const token = store.getState().auth.accessToken; // 👈 lấy token trong redux
     const res = await userApi.put("/update-info", payload, {
       headers: {
@@ -29,7 +29,15 @@ export const userService = {
     });
     return res.data;
   },
-
+  updateHealth: async (payload: { height: string; weight: string }) => {
+    const token = store.getState().auth.accessToken;
+    const res = await userApi.put("/update-health", payload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data;
+  },
   // Đổi avatar
   updateAvatar: async (avatarUrl: string) => {
     const res = await userApi.put("/avatar", { avatar: avatarUrl });

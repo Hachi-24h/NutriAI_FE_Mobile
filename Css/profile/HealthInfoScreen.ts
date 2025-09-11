@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
     logo:{
         width: width * 0.07,
         height: width * 0.07,
+      
+      
     },
     card: {
         backgroundColor: color.WHITE,

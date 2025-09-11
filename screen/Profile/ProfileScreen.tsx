@@ -29,7 +29,10 @@ const { width, height } = Dimensions.get('window');
 const ProfileScreen = () => {
   const user = useSelector((state: RootState) => state.user.profile);
   const avatarUrl = user?.avt || undefined;
-  console.log("Avatar URL:", avatarUrl);
+  const height = user?.height;
+  const weight = user?.weight;
+
+
   const [selected, setSelected] = useState<'user' | 'health'>('user');
   const animValue = useSharedValue(0); // 0 = user, 1 = health
 
@@ -96,7 +99,7 @@ const ProfileScreen = () => {
         </Animated.View>
       ) : (
         <Animated.View entering={SlideInRight.duration(300)} key="health">
-          <HealthInfoScreen />
+          <HealthInfoScreen heigth={height} weigth={weight} />
         </Animated.View>
       )}
     </ScrollView>
