@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: height * 0.02,
-        paddingLeft: height * 0.1,
+        paddingLeft: width * 0.1,
     },
     genderLabel: {
         marginRight: 10,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     },
     formSection:{
         flexDirection: 'column',
-        height: height * 0.53,
+        height: height * 0.43,
         backgroundColor: color.WHITE,
         padding: width * 0.05,
         borderRadius: width * 0.02,

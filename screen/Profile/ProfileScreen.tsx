@@ -22,18 +22,14 @@ import Animated, {
   SlideInRight,
 } from 'react-native-reanimated';
 import HealthInfoScreen from './component/HealthInfo';
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 const { width, height } = Dimensions.get('window');
 
 const ProfileScreen = () => {
-  const user = {
-    name: 'Nguyen Van A',
-    phone: '0375552313',
-    dateOfBirth: '01/01/2000',
-    email: 'nguyenvana.com',
-    gender: true,
-  };
-
+  const user = useSelector((state: RootState) => state.user.profile);
+  const avatarUrl = user?.avt || undefined;
+  console.log("Avatar URL:", avatarUrl);
   const [selected, setSelected] = useState<'user' | 'health'>('user');
   const animValue = useSharedValue(0); // 0 = user, 1 = health
 
@@ -53,10 +49,14 @@ const ProfileScreen = () => {
       ],
     };
   });
-
+  const formatDate = (isoDate?: string) => {
+    if (!isoDate) return "";
+    const date = new Date(isoDate);
+    return date.toLocaleDateString("en-GB"); // => "01/01/2000"
+  };
   return (
     <ScrollView style={styles.container}>
-      <AvatarSelector name={user.name} />
+      <AvatarSelector name={user?.fullname} avatarUrl={avatarUrl} />
 
       {/* Tab Switcher */}
       <View style={styles.tabWrapper}>
@@ -87,11 +87,11 @@ const ProfileScreen = () => {
       {selected === 'user' ? (
         <Animated.View entering={SlideInLeft.duration(300)} key="profile">
           <ProfileInfo
-            phone={user.phone}
-            name={user.name}
-            dateOfBirth={user.dateOfBirth}
-            email={user.email}
-            genderuser={user.gender ? 'Male' : 'Female'}
+            phone={user?.phone}
+            name={user?.fullname}
+            dateOfBirth={formatDate(user?.DOB)}
+            email={user?.email}
+            genderuser={user?.gender}
           />
         </Animated.View>
       ) : (

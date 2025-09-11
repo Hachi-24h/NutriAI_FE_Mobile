@@ -17,12 +17,13 @@ import { ArrowLeft2 } from 'iconsax-react-native';
 
 interface Props {
   name?: string;
+  avatarUrl?: string; 
 }
 
 const { height, width } = Dimensions.get('window');
 
-const AvatarSelector: React.FC<Props> = ({ name }) => {
-  const [avatarUri, setAvatarUri] = React.useState('https://i.imgur.com/K5oARFf.png');
+const AvatarSelector: React.FC<Props> = ({ name, avatarUrl }) => {
+  const [avatarUri, setAvatarUri] = React.useState(avatarUrl || '');
 
   const openGallery = () => {
     launchImageLibrary({ mediaType: 'photo' }, response => {

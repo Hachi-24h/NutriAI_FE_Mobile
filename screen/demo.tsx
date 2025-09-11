@@ -1,88 +1,95 @@
-import React, { useState } from "react";
-import { View, Text, Button, StyleSheet, Alert } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/store";
-import { userApi, authApi } from "../api/axiosClient";
-import { setUser, clearUser } from "../redux/slice/userSlice";
-import { clearAuth } from "../redux/slice/authSlice";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useState, useEffect } from "react";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import { otpService } from "../services/authService";
+// import otpService
 
+export default function App() {
+  const [phoneNumber, setPhoneNumber] = useState("+84377638894");
+  const [confirm, setConfirm] = useState<FirebaseAuthTypes.ConfirmationResult | null>(null);
+  const [code, setCode] = useState("");
+  const [counter, setCounter] = useState(0);
 
-const ProfileScreen = ({ navigation }: any) => {
-  const dispatch = useDispatch();
-  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
-  const refreshToken = useSelector((state: RootState) => state.auth.refreshToken);
-  const user = useSelector((state: RootState) => state.user.profile);
-
-  const [loading, setLoading] = useState(false);
-
-  // 👉 Hàm gọi API lấy thông tin mới nhất
-  const fetchProfile = async () => {
+  const sendOtp = async () => {
     try {
-      setLoading(true);
-      const res = await userApi.get("/me"); // tự refresh nếu token hết hạn
-      dispatch(setUser(res.data));
-      Alert.alert("✅ Thành công", "Đã cập nhật thông tin user");
+      const confirmation = await otpService.sendOtp(phoneNumber);
+      setConfirm(confirmation);
+      setCounter(60);
+      console.log("OTP đã được gửi!");
     } catch (err: any) {
-      console.log("❌ Fetch profile error:", err.message);
-      Alert.alert("Lỗi", "Không lấy được thông tin user");
-    } finally {
-      setLoading(false);
+      console.log("Gửi OTP thất bại:", err.message);
     }
   };
 
-  // 👉 Hàm logout
-  const handleLogout = async () => {
+  const verifyOtp = async () => {
+    if (!confirm) return;
     try {
-      if (refreshToken) {
-        await authApi.post("/logout", { refresh_token: refreshToken });
-      }
-      dispatch(clearAuth());
-      dispatch(clearUser());
-      await AsyncStorage.multiRemove(["accessToken", "refreshToken"]);
-      navigation.replace("signin");
-    } catch (err) {
-      console.log("❌ Logout error:", err);
+      const user = await otpService.verifyOtp(confirm, code, async (phone) => {
+        const newConfirm = await otpService.sendOtp(phone);
+        setConfirm(newConfirm);
+        setCounter(60);
+        console.log("🔄 OTP mới đã được gửi do session hết hạn.");
+        return newConfirm;
+      });
+      console.log("✅ Xác thực thành công!", user?.phoneNumber);
+    } catch (err: any) {
+      console.log("❌ Lỗi OTP:", err.message);
     }
   };
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (counter > 0) {
+      timer = setTimeout(() => setCounter(counter - 1), 1000);
+    }
+    return () => clearTimeout(timer);
+  }, [counter]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>👤 Thông tin User</Text>
-
-      {user ? (
-        <View style={styles.infoBox}>
-          <Text>Fullname: {user.fullname}</Text>
-          <Text>Email: {user.email}</Text>
-          <Text>Gender: {user.gender}</Text>
-          <Text>DOB: {user.DOB ? new Date(user.DOB).toLocaleDateString() : "N/A"}</Text>
-          <Text>Height: {user.height || "-"}</Text>
-          <Text>Weight: {user.weight || "-"}</Text>
-          <Text>BMI: {user.BMI || "-"}</Text>
-          <Text>Activity Level: {user.activityLevel || "-"}</Text>
-        </View>
+      {!confirm ? (
+        <>
+          <Text>Nhập số điện thoại (+84...):</Text>
+          <TextInput
+            style={styles.input}
+            value={phoneNumber}
+            onChangeText={setPhoneNumber}
+            placeholder="+84xxxxxxxx"
+            keyboardType="phone-pad"
+          />
+          <Button title="Gửi OTP" onPress={sendOtp} />
+        </>
       ) : (
-        <Text>Chưa có dữ liệu user</Text>
+        <>
+          <Text>Nhập mã OTP:</Text>
+          <TextInput
+            style={styles.input}
+            value={code}
+            onChangeText={setCode}
+            placeholder="123456"
+            keyboardType="number-pad"
+          />
+          <Button title="Xác minh" onPress={verifyOtp} />
+
+          {counter > 0 ? (
+            <Text style={styles.countdown}>Gửi lại OTP sau {counter}s</Text>
+          ) : (
+            <Button title="Gửi lại OTP" onPress={sendOtp} />
+          )}
+        </>
       )}
-
-      <Text style={styles.token}>Access Token: {accessToken?.slice(0, 25)}...</Text>
-
-      <View style={{ marginTop: 20 }}>
-        <Button title={loading ? "Đang tải..." : "🔄 Làm mới từ API"} onPress={fetchProfile} disabled={loading} />
-      </View>
-
-      <View style={{ marginTop: 20 }}>
-        <Button title="🚪 Đăng xuất" onPress={handleLogout} color="red" />
-      </View>
     </View>
   );
-};
-
-export default ProfileScreen;
+}
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center", padding: 20 },
-  title: { fontSize: 22, fontWeight: "bold", marginBottom: 15 },
-  infoBox: { marginBottom: 20 },
-  token: { marginTop: 10, fontSize: 12, color: "gray" },
+  container: { flex: 1, justifyContent: "center", padding: 20 },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    marginVertical: 10,
+    borderRadius: 5,
+  },
+  countdown: { marginTop: 10, color: "red", textAlign: "center" },
 });

@@ -20,12 +20,27 @@ import gradientPresets from '../../Custom/gradientPresets';
 import Footer from '../other/footer';
 import SideMenu from './component/SideMenu';
 import { useLogout } from '../../Utils/useLogout';
+// import { checkDefaultUserFields } from './component/checkDefaultUserFields';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 
 
 const Home = ({navigation}: any) => {
     const tip = " Stay hydrated to keep your metabolism running efficiently! "
+    const user = useSelector((state: RootState) => state.user.profile);
+    console.log("User in Home:", user);
     const [menuVisible, setMenuVisible] = useState(false);
     const logout = useLogout();
+//     useEffect(() => {
+//     const needUpdate = checkDefaultUserFields(user);
+//     if (needUpdate.length > 0) {
+//       Alert.alert(
+//         "⚠️ Thông tin chưa hoàn chỉnh",
+//         `Vui lòng cập nhật: ${needUpdate.join(", ")}`
+//       );
+//     }
+//   }, [user]); 
+  
     const handleMenuSelect = (option: string) => {
         switch (option) {
             case 'Profile':

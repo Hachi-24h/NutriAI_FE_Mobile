@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface User {
+export interface User {
   id?: string;
   authId?: string;
   fullname?: string;
@@ -12,7 +12,7 @@ interface User {
   activityLevel?: number;
   email?: string;
   phone?: string;
-  avatar?: string;
+  avt?: string; // đổi thành avt cho khớp backend
 }
 
 interface UserState {

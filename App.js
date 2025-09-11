@@ -16,7 +16,7 @@ const defaultOptions = {
 };
 
 const App = () => {
-  const initialScreen = 'signin';
+  const initialScreen = 'signin'; // Đ
 
   return (
     <Provider store={store}>

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { IP_USER } from "../config/Ipconfig";
+import { store } from "../redux/store";
 
 const userApi = axios.create({
   baseURL: IP_USER,
@@ -14,16 +15,18 @@ export const userService = {
   },
 
   // Cập nhật thông tin người dùng
-  updateProfile: async (payload: {
+    updateProfile: async (
+    payload: {
     fullname?: string;
     DOB?: string;
     gender?: "MALE" | "FEMALE" | "OTHER";
-    height?: string;
-    weight?: string;
-    BMI?: string;
-    activityLevel?: number;
   }) => {
-    const res = await userApi.put("/update", payload);
+    const token = store.getState().auth.accessToken; // 👈 lấy token trong redux
+    const res = await userApi.put("/update-info", payload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return res.data;
   },
 
