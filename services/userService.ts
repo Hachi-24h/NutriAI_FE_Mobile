@@ -39,8 +39,21 @@ export const userService = {
     return res.data;
   },
   // Đổi avatar
-  updateAvatar: async (avatarUrl: string) => {
-    const res = await userApi.put("/avatar", { avatar: avatarUrl });
-    return res.data;
+  updateAvatar: async (file: any) => {
+    const token = store.getState().auth.accessToken;
+    const formData = new FormData();
+    formData.append("file", {
+      uri: file.uri,
+      type: file.type || "image/jpeg",
+      name: file.fileName || "avatar.jpg",
+    } as any);
+
+    const res = await userApi.patch("/update-avatar", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.data; // { message, user }
   },
 };

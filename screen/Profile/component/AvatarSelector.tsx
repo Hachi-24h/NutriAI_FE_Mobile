@@ -14,21 +14,37 @@ import color from '../../../Custom/Color';
 import LinearGradient from 'react-native-linear-gradient';
 import gradientPresets from '../../../Custom/gradientPresets';
 import { ArrowLeft2 } from 'iconsax-react-native';
+import { userService } from '../../../services/userService';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../redux/store';
+import { setUser } from '../../../redux/slice/userSlice';
 
 interface Props {
   name?: string;
-  avatarUrl?: string; 
+  avatarUrl?: string;
 }
 
 const { height, width } = Dimensions.get('window');
 
 const AvatarSelector: React.FC<Props> = ({ name, avatarUrl }) => {
   const [avatarUri, setAvatarUri] = React.useState(avatarUrl || '');
-
+  const dispatch = useDispatch();
+  const oldUser = useSelector((state: RootState) => state.user.profile);
   const openGallery = () => {
-    launchImageLibrary({ mediaType: 'photo' }, response => {
+    launchImageLibrary({ mediaType: 'photo' }, async response => {
       if (response.assets && response.assets.length > 0) {
-        setAvatarUri(response.assets[0].uri || avatarUri);
+        const file = response.assets[0];
+        try {
+          const result = await userService.updateAvatar(file);
+          // merge user cũ + user mới để giữ phone/email
+          const mergedUser = { ...oldUser, ...result.user };
+          dispatch(setUser(mergedUser));
+          setAvatarUri(result.user.avt);
+          Alert.alert("✅ Đổi avatar thành công");
+        } catch (err) {
+          console.log("Update avatar error:", err);
+          Alert.alert("❌ Lỗi", "Không thể đổi avatar");
+        }
       }
     });
   };
@@ -64,15 +80,15 @@ const AvatarSelector: React.FC<Props> = ({ name, avatarUrl }) => {
               <Image source={avatarUri ? { uri: avatarUri } : require('../../../Image/sug.png')} style={styles.avatar} />
             </LinearGradient>
           </MenuTrigger>
-        
+
           <MenuOptions optionsContainerStyle={styles.menuOptions}>
             <MenuOption onSelect={openGallery} text="Change avatar" style={[styles.textopt]} />
             <MenuOption onSelect={deleteAvatar} text="Delete avatar" style={styles.textopt} />
           </MenuOptions>
         </Menu>
-          <TouchableOpacity style={styles.buttonBack}>
-            <ArrowLeft2 size={height* 0.05} color={color.WHITE} />
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonBack}>
+          <ArrowLeft2 size={height * 0.05} color={color.WHITE} />
+        </TouchableOpacity>
         <Text style={styles.name}>{name}</Text>
       </LinearGradient>
     </MenuProvider>
@@ -132,7 +148,7 @@ const styles = StyleSheet.create({
     height: width * 0.3,
     borderRadius: width * 0.15,
   },
-  buttonBack:{
+  buttonBack: {
     position: 'absolute',
     top: height * 0.02,
     left: width * 0.05,
